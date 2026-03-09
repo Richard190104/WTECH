@@ -1,0 +1,387 @@
+:root {
+	--bg: #e4e8ef;
+	--panel: #d9dee7;
+	--panel-strong: #b8beca;
+	--line: #8d97a8;
+	--text: #1c2534;
+	--muted: #647082;
+	--badge: #4d596d;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body.shop-page {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-shell {
+	min-height: 100vh;
+}
+
+.border-wrap {
+	border: 1px solid var(--line);
+	border-left: 0;
+	border-right: 0;
+	background: var(--panel);
+}
+
+.border-bottom-wrap {
+	border-bottom: 1px solid var(--line);
+}
+
+.top-links a,
+.register-link,
+.category-links a {
+	color: #3d4d66;
+	text-decoration: none;
+}
+
+.top-links a:hover,
+.register-link:hover,
+.category-links a:hover {
+	text-decoration: underline;
+}
+
+.top-links {
+	gap: 0.7rem;
+}
+
+.top-links .divider {
+	color: #60708a;
+}
+
+.neutral-input,
+.neutral-search {
+	border: 2px solid var(--line);
+	border-radius: 0;
+	background: #edf0f5;
+	color: var(--text);
+}
+
+.neutral-input::placeholder,
+.neutral-search::placeholder {
+	color: #7a8596;
+}
+
+.neutral-btn {
+	border: 2px solid var(--line);
+	border-radius: 0;
+	color: var(--text);
+	background: var(--panel-strong);
+	font-weight: 600;
+}
+
+.neutral-btn:hover {
+	border-color: #6f7a8e;
+	background: #a9b0bd;
+	color: #101722;
+}
+
+.logo-box {
+	height: 58px;
+	border: 2px solid var(--line);
+	display: grid;
+	place-items: center;
+	font-weight: 500;
+	letter-spacing: 0.6px;
+	background: var(--panel);
+}
+
+.cart-btn {
+	border: 2px solid var(--line);
+	border-radius: 0;
+	background: var(--panel);
+	color: var(--text);
+	min-width: 98px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.cart-icon {
+	width: 20px;
+	height: 20px;
+	background: #677286;
+	border: 1px solid #677286;
+	display: inline-block;
+}
+
+.category-links {
+	row-gap: 0.5rem;
+}
+
+.promo-card,
+.deal-card,
+.product-card,
+.side-promo {
+	border: 2px solid var(--line);
+	background: var(--panel-strong);
+}
+
+.promo-card {
+	min-height: 305px;
+	padding: 1.5rem 1.3rem;
+	position: relative;
+}
+
+.promo-card h2 {
+	font-size: 2rem;
+	font-weight: 800;
+	margin: 0;
+	line-height: 1.05;
+	text-transform: uppercase;
+}
+
+.promo-card h3 {
+	margin-top: 0.4rem;
+	font-size: 2.3rem;
+	font-weight: 700;
+}
+
+.promo-card p {
+	font-size: 1.5rem;
+	margin-top: 0.5rem;
+}
+
+.promo-discount,
+.deal-badge {
+	background: var(--badge);
+	color: #eaf0fc;
+	font-weight: 700;
+	text-align: center;
+}
+
+.promo-discount {
+	position: absolute;
+	top: 26px;
+	right: 28px;
+	min-width: 64px;
+	padding: 6px 10px;
+	font-size: 0.95rem;
+}
+
+.deal-card {
+	min-height: 305px;
+	padding: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.deal-card h2 {
+	font-size: 1.7rem;
+	font-weight: 700;
+	margin-bottom: 1.3rem;
+}
+
+.deal-badge {
+	min-width: 102px;
+	font-size: 2rem;
+	padding: 0.35rem 1rem;
+}
+
+.section-title {
+	font-weight: 700;
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+}
+
+.product-card {
+	padding: 0.8rem;
+	min-height: 260px;
+	background: #e2e5ec;
+}
+
+.product-image-placeholder {
+	border: 2px solid var(--line);
+	background: #c8ced9;
+	min-height: 120px;
+	font-size: 2.1rem;
+	display: grid;
+	place-items: center;
+	color: #6e7787;
+	margin-bottom: 0.8rem;
+}
+
+.product-card h3 {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.product-card p {
+	margin: 0.25rem 0;
+	color: #5e6878;
+	font-size: 0.78rem;
+}
+
+.product-card strong {
+	display: inline-block;
+	margin-top: 0.45rem;
+	font-size: 0.92rem;
+}
+
+.side-promo {
+	min-height: 220px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.side-promo h3 {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.side-promo p {
+	margin: 0.4rem 0 0;
+	font-size: 0.78rem;
+}
+
+.side-promo.empty {
+	background: #c8ced9;
+}
+
+.recommended-row {
+	display: flex;
+	align-items: center;
+	gap: 0.3rem;
+}
+
+.nav-arrow {
+	width: 16px;
+	height: 16px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	border: 1px solid var(--line);
+	background: #aeb6c4;
+	color: #223047;
+	font-size: 0.75rem;
+	line-height: 1;
+}
+
+.product-card-compact {
+	min-height: 218px;
+}
+
+.product-card-compact .product-image-placeholder {
+	min-height: 96px;
+}
+
+.footer-wrap {
+	border-top: 1px solid var(--line);
+	border-bottom: 1px solid var(--line);
+	background: #cbd2de;
+	padding: 0.8rem 0;
+}
+
+.footer-content {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(110px, 1fr)) 82px;
+	gap: 1rem;
+	align-items: end;
+}
+
+.footer-content h3 {
+	font-size: 0.48rem;
+	font-weight: 700;
+	margin: 0;
+	text-transform: none;
+}
+
+.footer-content p {
+	font-size: 0.44rem;
+	margin: 0.08rem 0;
+	color: #425064;
+}
+
+.footer-logo-box {
+	height: 22px;
+	border: 1px solid var(--line);
+	display: grid;
+	place-items: center;
+	font-size: 0.42rem;
+	background: #b4bcc9;
+}
+
+@media (max-width: 1200px) {
+	body.shop-page {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 991.98px) {
+	.promo-card,
+	.deal-card {
+		min-height: 240px;
+	}
+
+	.promo-card h2 {
+		font-size: 2rem;
+	}
+
+	.promo-card h3 {
+		font-size: 2.2rem;
+	}
+
+	.promo-card p {
+		font-size: 1.4rem;
+	}
+
+	.deal-card h2 {
+		font-size: 1.6rem;
+	}
+
+	.deal-badge {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.auth-form {
+		width: 100%;
+		flex-wrap: wrap;
+	}
+
+	.auth-form .neutral-input {
+		min-width: 140px;
+		flex: 1;
+	}
+
+	.logo-box {
+		width: 180px;
+	}
+
+	.promo-discount {
+		min-width: 72px;
+		font-size: 1rem;
+		top: 18px;
+		right: 18px;
+	}
+
+	.side-promo {
+		min-height: 140px;
+	}
+
+	.footer-content {
+		grid-template-columns: repeat(3, minmax(110px, 1fr));
+	}
+
+	.footer-logo-box {
+		grid-column: span 3;
+		max-width: 90px;
+	}
+}
