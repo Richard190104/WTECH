@@ -516,6 +516,248 @@ body.shop-page {
 	border-color: #3f4b61;
 }
 
+.pdp-breadcrumb {
+	font-size: 0.74rem;
+	color: #667389;
+	margin-bottom: 0.9rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.3rem;
+}
+
+.pdp-breadcrumb a {
+	color: #4b5a71;
+	text-decoration: none;
+}
+
+.pdp-breadcrumb a:hover {
+	text-decoration: underline;
+}
+
+.pdp-main-image {
+	height: 380px;
+	border: 2px solid var(--line);
+	background: #c5ccd8;
+	display: grid;
+	place-items: center;
+	font-size: 4rem;
+	color: #6a7688;
+}
+
+.pdp-thumbs {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.3rem;
+	margin-top: 0.35rem;
+}
+
+.pdp-thumb {
+	height: 62px;
+	border: 2px solid var(--line);
+	background: #c3cad7;
+	color: #748094;
+	font-size: 1.2rem;
+	padding: 0;
+}
+
+.pdp-thumb.is-active {
+	background: #aeb8c8;
+	border-color: #5e6e87;
+	color: #24334a;
+	font-weight: 700;
+}
+
+.pdp-title {
+	font-size: 2.2rem;
+	font-weight: 700;
+	margin: 0;
+}
+
+.pdp-rating {
+	font-size: 0.72rem;
+	color: #69778d;
+	margin: 0.25rem 0 0;
+}
+
+.pdp-price {
+	font-size: 2.3rem;
+	font-weight: 700;
+	margin: 0.4rem 0 0.7rem;
+}
+
+.pdp-description {
+	font-size: 0.78rem;
+	line-height: 1.45;
+	color: #55647b;
+	max-width: 520px;
+	margin-bottom: 0.75rem;
+}
+
+.pdp-spec-box {
+	border: 2px solid var(--line);
+	background: #d1d8e2;
+	padding: 0.65rem;
+	max-width: 520px;
+}
+
+.pdp-spec-box h2 {
+	font-size: 0.92rem;
+	font-weight: 700;
+	margin: 0 0 0.45rem;
+}
+
+.pdp-spec-row {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.65rem;
+	padding: 0.07rem 0;
+	color: #5a687f;
+}
+
+.pdp-spec-row strong {
+	color: #25344d;
+}
+
+.pdp-actions {
+	margin-top: 0.75rem;
+	max-width: 520px;
+	display: grid;
+	gap: 0.35rem;
+}
+
+.pdp-qty {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	font-size: 0.76rem;
+	font-weight: 600;
+	margin-bottom: 0.1rem;
+}
+
+.pdp-btn {
+	border: 2px solid #4b5a70;
+	font-size: 0.78rem;
+	font-weight: 700;
+	padding: 0.45rem 0.7rem;
+}
+
+.pdp-btn-primary {
+	background: #4b5a70;
+	color: #eef2fb;
+}
+
+.pdp-btn-primary:hover {
+	background: #404d62;
+	border-color: #404d62;
+}
+
+.pdp-btn-secondary {
+	background: #c9d0dc;
+	color: #253349;
+	border-color: #a1adbf;
+}
+
+.pdp-btn-secondary:hover {
+	background: #bcc4d1;
+}
+
+.pdp-feedback {
+	min-height: 1.2rem;
+	margin: 0;
+	font-size: 0.72rem;
+	font-weight: 600;
+	color: #5f6b80;
+}
+
+.pdp-feedback.success {
+	color: #2a4a25;
+}
+
+.pdp-feedback.info {
+	color: #334b6e;
+}
+
+.pdp-info {
+	border-top: 2px solid #b2bccb;
+	padding-top: 0.5rem;
+}
+
+.pdp-tabs {
+	display: inline-flex;
+	gap: 0.2rem;
+	margin-bottom: 0.35rem;
+}
+
+.pdp-tab {
+	border: 1px solid var(--line);
+	background: #cbd2de;
+	font-size: 0.68rem;
+	padding: 0.35rem 0.7rem;
+	color: #2f3d55;
+}
+
+.pdp-tab.active {
+	background: #d9dee7;
+	font-weight: 700;
+}
+
+.pdp-info-panel {
+	border: 2px solid #b2bccb;
+	background: #dde2ea;
+	min-height: 190px;
+	padding: 0.95rem;
+	font-size: 0.72rem;
+	color: #5a677d;
+	line-height: 1.5;
+}
+
+.pdp-related-card {
+	border: 2px solid var(--line);
+	background: #d9dee7;
+	padding: 0.45rem;
+	min-height: 210px;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.pdp-related-image {
+	border: 2px solid var(--line);
+	background: #c0c8d5;
+	height: 102px;
+	display: grid;
+	place-items: center;
+	font-size: 2rem;
+	color: #6f7b8f;
+	margin-bottom: 0.05rem;
+}
+
+.pdp-related-card h3 {
+	margin: 0;
+	font-size: 0.66rem;
+	font-weight: 700;
+}
+
+.pdp-related-card strong {
+	font-size: 0.95rem;
+	margin-bottom: 0.2rem;
+}
+
+.pdp-related-btn {
+	margin-top: auto;
+	border: 2px solid #4b5a70;
+	background: #4b5a70;
+	color: #ecf1fb;
+	font-size: 0.62rem;
+	font-weight: 700;
+	padding: 0.3rem;
+}
+
+.pdp-related-btn:hover {
+	background: #3f4c61;
+	border-color: #3f4c61;
+}
+
 @media (max-width: 1200px) {
 	body.shop-page {
 		font-size: 14px;
@@ -546,6 +788,10 @@ body.shop-page {
 
 	.deal-badge {
 		font-size: 2rem;
+	}
+
+	.pdp-main-image {
+		height: 320px;
 	}
 }
 
@@ -634,5 +880,19 @@ body.shop-page {
 	.continue-btn,
 	.order-summary h2 {
 		font-size: 1rem;
+	}
+
+	.pdp-main-image {
+		height: 270px;
+	}
+
+	.pdp-title,
+	.pdp-price {
+		font-size: 1.5rem;
+	}
+
+	.pdp-tabs {
+		display: flex;
+		flex-wrap: wrap;
 	}
 }
