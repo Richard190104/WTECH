@@ -67,12 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         thumb.addEventListener("click", () => {
             thumbs.forEach((item) => item.classList.remove("is-active"));
             thumb.classList.add("is-active");
-            const thumbImage = thumb.querySelector("img");
-            const mainImageTag = mainImage.querySelector("img");
-            if (thumbImage && mainImageTag) {
-                mainImageTag.src = thumbImage.src;
-                mainImageTag.alt = thumbImage.alt || "Product View";
-            }
+            mainImage.textContent = thumb.dataset.image || "Product View";
         });
     });
 
