@@ -375,7 +375,7 @@ body.shop-page {
 }
 
 .step-label {
-	font-size: 1.95rem;
+	font-size: 1.2rem;
 	font-weight: 500;
 	color: #707b8f;
 }
@@ -434,7 +434,7 @@ body.shop-page {
 
 .cart-product {
 	font-weight: 700;
-	font-size: 1.55rem;
+	font-size: 1.2rem;
 }
 
 .qty-box {
@@ -461,7 +461,7 @@ body.shop-page {
 }
 
 .cart-price {
-	font-size: 1.7rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 }
 
@@ -482,7 +482,7 @@ body.shop-page {
 }
 
 .order-summary h2 {
-	font-size: 2rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 	margin: 0 0 1rem;
 }
@@ -492,7 +492,7 @@ body.shop-page {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	font-size: 1.55rem;
+	font-size: 1.2rem;
 	margin-bottom: 0.55rem;
 }
 
@@ -510,7 +510,7 @@ body.shop-page {
 }
 
 .summary-total {
-	font-size: 2rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 	margin-bottom: 1rem;
 }
