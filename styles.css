@@ -743,7 +743,7 @@ header {
 }
 
 .step-label {
-	font-size: 1.95rem;
+	font-size: 1.2rem;
 	font-weight: 500;
 	color: #707b8f;
 }
@@ -802,7 +802,7 @@ header {
 
 .cart-product {
 	font-weight: 700;
-	font-size: 1.55rem;
+	font-size: 1.2rem;
 }
 
 .qty-box {
@@ -829,7 +829,7 @@ header {
 }
 
 .cart-price {
-	font-size: 1.7rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 }
 
@@ -850,7 +850,7 @@ header {
 }
 
 .order-summary h2 {
-	font-size: 2rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 	margin: 0 0 1rem;
 }
@@ -860,7 +860,7 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	font-size: 1.55rem;
+	font-size: 1.2rem;
 	margin-bottom: 0.55rem;
 }
 
@@ -878,7 +878,7 @@ header {
 }
 
 .summary-total {
-	font-size: 2rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 	margin-bottom: 1rem;
 }
