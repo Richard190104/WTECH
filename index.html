@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ElectroHub</title>
+    <title>ElectroHub - Electronics Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="shop-page">
@@ -17,146 +18,262 @@
                     <article class="promo-card h-100">
                         <div class="promo-discount">-25%</div>
                         <h2>ULTRA PERFORMANCE</h2>
-                        <h3>PH Blackbox 4000</h3>
-                        <p>Only until end of January</p>
+                        <h3>Gaming Laptop</h3>
+                        <p>Experience gaming like never before. RTX 4080 • 32GB RAM • 1TB SSD</p>
+                        <button class="btn btn-light mt-3" style="font-weight: 600;">Shop Now <i class="fas fa-arrow-right ms-2"></i></button>
                     </article>
                 </div>
                 <div class="col-12 col-lg-4">
                     <aside class="deal-card h-100">
                         <h2>Deal of the Month</h2>
                         <div class="deal-badge">-50%</div>
+                        <p style="margin-top: 16px; font-size: 0.9rem;">Wireless Headphones Pro</p>
                     </aside>
                 </div>
             </section>
 
             <section class="mt-5">
-                <h2 class="section-title">Newest Products</h2>
+                <h2 class="section-title">Featured Products</h2>
                 <div class="row g-3">
                     <div class="col-12 col-lg-9">
                         <div class="row g-3">
                             <div class="col-12 col-md-6 col-xl-4">
                                 <article class="product-card">
-                                    <a href="product-detail.html" class="product-card-link">
-                                        <div class="product-image-placeholder">×</div>
+                                    <div style="position: relative;">
+                                        <img src="https://picsum.photos/seed/gaming-console/640/480" alt="Gaming Console" loading="lazy">
+                                        <span class="product-discount-badge">-20%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-rating">
+                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                            <span>(128)</span>
+                                        </div>
                                         <h3>PlayDock 5 Console</h3>
                                         <p>Latest gaming console with 4K support</p>
                                         <strong>$299.99</strong>
-                                    </a>
+                                        <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                                    </div>
                                 </article>
                             </div>
                             <div class="col-12 col-md-6 col-xl-4">
                                 <article class="product-card">
-                                    <a href="product-detail.html" class="product-card-link">
-                                        <div class="product-image-placeholder">×</div>
+                                    <div style="position: relative;">
+                                        <img src="https://picsum.photos/seed/laptop-ultrabook/640/480" alt="UltraBook Pro" loading="lazy">
+                                        <span class="product-discount-badge">-15%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-rating">
+                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                            <span>(256)</span>
+                                        </div>
                                         <h3>UltraBook Pro 15</h3>
                                         <p>High performance laptop for professionals</p>
-                                        <strong>$299.99</strong>
-                                    </a>
+                                        <strong>$1,299.99</strong>
+                                        <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                                    </div>
                                 </article>
                             </div>
                             <div class="col-12 col-md-6 col-xl-4">
                                 <article class="product-card">
-                                    <a href="product-detail.html" class="product-card-link">
-                                        <div class="product-image-placeholder">×</div>
+                                    <div style="position: relative;">
+                                        <img src="https://picsum.photos/seed/smartphone-mobile/640/480" alt="SmartPhone X12" loading="lazy">
+                                        <span class="product-discount-badge">-10%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-rating">
+                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                            <span>(89)</span>
+                                        </div>
                                         <h3>SmartPhone X12</h3>
                                         <p>5G enabled smartphone with triple camera</p>
-                                        <strong>$299.99</strong>
-                                    </a>
+                                        <strong>$899.99</strong>
+                                        <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                                    </div>
                                 </article>
                             </div>
                             <div class="col-12 col-md-6 col-xl-4">
                                 <article class="product-card">
-                                    <a href="product-detail.html" class="product-card-link">
-                                        <div class="product-image-placeholder">×</div>
+                                    <div style="position: relative;">
+                                        <img src="https://picsum.photos/seed/headphones-audio/640/480" alt="Wireless Headset" loading="lazy">
+                                        <span class="product-discount-badge">-30%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-rating">
+                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                            <span>(342)</span>
+                                        </div>
                                         <h3>Wireless Headset Pro</h3>
                                         <p>Active noise cancellation, 30h battery</p>
-                                        <strong>$299.99</strong>
-                                    </a>
+                                        <strong>$199.99</strong>
+                                        <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                                    </div>
                                 </article>
                             </div>
                             <div class="col-12 col-md-6 col-xl-4">
                                 <article class="product-card">
-                                    <a href="product-detail.html" class="product-card-link">
-                                        <div class="product-image-placeholder">×</div>
+                                    <div style="position: relative;">
+                                        <img src="https://picsum.photos/seed/mouse-gaming/640/480" alt="Gaming Mouse" loading="lazy">
+                                        <span class="product-discount-badge">-12%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-rating">
+                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                            <span>(175)</span>
+                                        </div>
                                         <h3>Gaming Mouse RGB</h3>
-                                        <p>Precision optical sensor</p>
-                                        <strong>$299.99</strong>
-                                    </a>
+                                        <p>Precision optical sensor, 8000 DPI</p>
+                                        <strong>$79.99</strong>
+                                        <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                                    </div>
                                 </article>
                             </div>
                             <div class="col-12 col-md-6 col-xl-4">
                                 <article class="product-card">
-                                    <a href="product-detail.html" class="product-card-link">
-                                        <div class="product-image-placeholder">×</div>
+                                    <div style="position: relative;">
+                                        <img src="https://picsum.photos/seed/monitor-display/640/480" alt="4K Monitor" loading="lazy">
+                                        <span class="product-discount-badge">-18%</span>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-rating">
+                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                            <span>(203)</span>
+                                        </div>
                                         <h3>4K Monitor 27&quot;</h3>
                                         <p>Professional-grade display with HDR</p>
-                                        <strong>$299.99</strong>
-                                    </a>
+                                        <strong>$599.99</strong>
+                                        <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                                    </div>
                                 </article>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 col-lg-3 d-flex flex-column gap-3">
-                        <aside class="side-promo">
-                            <h3>PC Accessories</h3>
-                            <p>Exclusive Discount</p>
+                        <aside class="side-promo" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);">
+                            <h3><i class="fas fa-laptop-code"></i> PC Accessories</h3>
+                            <p>Up to 40% Off</p>
+                            <button class="side-promo-btn">Explore</button>
                         </aside>
-                        <aside class="side-promo">
-                            <h3>Sale you have</h3>
-                            <p>never seen before</p>
+                        <aside class="side-promo" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
+                            <h3><i class="fas fa-fire"></i> Flash Sale</h3>
+                            <p>Limited Time Only</p>
+                            <button class="side-promo-btn" style="color: #D97706;">Shop Now</button>
                         </aside>
                     </div>
                 </div>
             </section>
 
-            <section class="mt-5 recommended-block">
-                <h2 class="section-title">Recommended</h2>
-                <div class="recommended-row">
-                    <button class="nav-arrow" aria-label="Previous">&lsaquo;</button>
-                    <div class="row g-2 flex-grow-1">
-                        <div class="col-12 col-md-6 col-xl-3">
-                            <article class="product-card product-card-compact">
-                                <a href="product-detail.html" class="product-card-link">
-                                    <div class="product-image-placeholder">×</div>
-                                    <h3>Product 1</h3>
-                                    <p>Description text here</p>
-                                    <strong>$199.99</strong>
-                                </a>
-                            </article>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-3">
-                            <article class="product-card product-card-compact">
-                                <a href="product-detail.html" class="product-card-link">
-                                    <div class="product-image-placeholder">×</div>
-                                    <h3>Product 2</h3>
-                                    <p>Description text here</p>
-                                    <strong>$199.99</strong>
-                                </a>
-                            </article>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-3">
-                            <article class="product-card product-card-compact">
-                                <a href="product-detail.html" class="product-card-link">
-                                    <div class="product-image-placeholder">×</div>
-                                    <h3>Product 3</h3>
-                                    <p>Description text here</p>
-                                    <strong>$199.99</strong>
-                                </a>
-                            </article>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-3">
-                            <article class="product-card product-card-compact">
-                                <a href="product-detail.html" class="product-card-link">
-                                    <div class="product-image-placeholder">×</div>
-                                    <h3>Product 4</h3>
-                                    <p>Description text here</p>
-                                    <strong>$199.99</strong>
-                                </a>
-                            </article>
-                        </div>
+            <section class="mt-5">
+                <h2 class="section-title">Trending Now</h2>
+                <div class="row g-3">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <article class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://picsum.photos/seed/keyboard-mech/640/480" alt="Product" loading="lazy">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-rating">
+                                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                    <span>(94)</span>
+                                </div>
+                                <h3>Mechanical Keyboard</h3>
+                                <p>RGB Mechanical Switches</p>
+                                <strong>$149.99</strong>
+                                <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                            </div>
+                        </article>
                     </div>
-                    <button class="nav-arrow" aria-label="Next">&rsaquo;</button>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <article class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://picsum.photos/seed/webcam-camera/640/480" alt="Product" loading="lazy">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-rating">
+                                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                    <span>(67)</span>
+                                </div>
+                                <h3>HD Webcam 4K</h3>
+                                <p>Auto Focus & Stereo</p>
+                                <strong>$129.99</strong>
+                                <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <article class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://picsum.photos/seed/tablet-ipad/640/480" alt="Product" loading="lazy">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-rating">
+                                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                    <span>(211)</span>
+                                </div>
+                                <h3>Tablet Pro 12.9</h3>
+                                <p>Super Retina Display</p>
+                                <strong>$649.99</strong>
+                                <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <article class="product-card">
+                            <div style="position: relative;">
+                                <img src="https://picsum.photos/seed/speaker-audio/640/480" alt="Product" loading="lazy">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-rating">
+                                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                    <span>(156)</span>
+                                </div>
+                                <h3>Smart Speaker</h3>
+                                <p>Voice Control Enabled</p>
+                                <strong>$89.99</strong>
+                                <div class="product-card-actions">
+                                            <a class="product-view-btn" href="product-detail.html"><i class="fas fa-eye"></i> View</a>
+                                            <button class="product-icon-btn product-cart-btn" type="button" title="Add to cart" aria-label="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                                            <button class="product-icon-btn product-fav-btn" type="button" title="Add to favourites" aria-label="Add to favourites"><i class="far fa-heart"></i></button>
+                                        </div>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </section>
         </main>
