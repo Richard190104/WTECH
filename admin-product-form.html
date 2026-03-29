@@ -25,17 +25,37 @@
         <main class="container-xl py-4">
             <section class="admin-panel" aria-labelledby="admin-form-title">
                 <h1 id="admin-form-title" class="admin-title">Add product</h1>
-                <p class="admin-subtitle">A product must contain a name, description, and at least 2 photos.</p>
+                <p class="admin-subtitle">Fill in title, price, discount, quantity, description, specifications, brand, category, and upload images.</p>
 
                 <form id="admin-product-form" class="admin-form-grid" novalidate>
                     <div class="admin-form-field admin-col-2">
-                        <label for="product-name">Product name</label>
-                        <input type="text" id="product-name" class="admin-input" required>
+                        <label for="product-title">Title</label>
+                        <input type="text" id="product-title" class="admin-input" required>
+                    </div>
+
+                    <div class="admin-form-field">
+                        <label for="product-price">Price ($)</label>
+                        <input type="number" id="product-price" class="admin-input" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="admin-form-field">
+                        <label for="product-discount">Discount (%)</label>
+                        <input type="number" id="product-discount" class="admin-input" min="0" max="100" step="1" required>
+                    </div>
+
+                    <div class="admin-form-field">
+                        <label for="product-quantity">Quantity</label>
+                        <input type="number" id="product-quantity" class="admin-input" min="0" step="1" required>
                     </div>
 
                     <div class="admin-form-field admin-col-2">
                         <label for="product-description">Description</label>
                         <textarea id="product-description" class="admin-input admin-textarea" rows="4" required></textarea>
+                    </div>
+
+                    <div class="admin-form-field admin-col-2">
+                        <label for="product-specifications">Specifications</label>
+                        <textarea id="product-specifications" class="admin-input admin-textarea" rows="4" required></textarea>
                     </div>
 
                     <div class="admin-form-field">
@@ -54,36 +74,11 @@
                         <input type="text" id="product-brand" class="admin-input" required>
                     </div>
 
-                    <div class="admin-form-field">
-                        <label for="product-color">Color</label>
-                        <select id="product-color" class="admin-input" required>
-                            <option value="">Select color</option>
-                            <option value="Black">Black</option>
-                            <option value="White">White</option>
-                            <option value="Gray">Gray</option>
-                            <option value="Blue">Blue</option>
-                            <option value="Red">Red</option>
-                        </select>
-                    </div>
-
-                    <div class="admin-form-field">
-                        <label for="product-price">Price ($)</label>
-                        <input type="number" id="product-price" class="admin-input" min="0" step="0.01" required>
-                    </div>
-
-                    <div class="admin-form-field">
-                        <label for="product-stock">Items in stock</label>
-                        <input type="number" id="product-stock" class="admin-input" min="0" step="1" required>
-                    </div>
-
                     <div class="admin-form-field admin-col-2">
-                        <label for="product-image-1">Photo 1 (file path)</label>
-                        <input type="text" id="product-image-1" class="admin-input" placeholder="images/Playdock%205%20console.jpg" required>
-                    </div>
-
-                    <div class="admin-form-field admin-col-2">
-                        <label for="product-image-2">Photo 2 (file path)</label>
-                        <input type="text" id="product-image-2" class="admin-input" placeholder="images/smartphone%20x12.jpg" required>
+                        <label for="product-images">Images</label>
+                        <input type="file" id="product-images" class="admin-input" accept="image/*" multiple>
+                        <p class="admin-field-note">Frontend demo only: files are not uploaded to a server.</p>
+                        <ul id="product-images-preview" class="admin-file-list" aria-live="polite"></ul>
                     </div>
 
                     <p id="admin-form-feedback" class="admin-feedback admin-col-2" aria-live="polite"></p>

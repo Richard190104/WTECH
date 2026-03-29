@@ -1917,6 +1917,21 @@ header {
 	color: var(--text-primary);
 }
 
+.admin-field-note {
+	margin: 6px 0 0;
+	font-size: 0.8rem;
+	color: var(--text-secondary);
+}
+
+.admin-file-list {
+	margin: 8px 0 0;
+	padding-left: 18px;
+	color: var(--text-secondary);
+	font-size: 0.85rem;
+	max-height: 120px;
+	overflow: auto;
+}
+
 .admin-input {
 	width: 100%;
 	border: 1px solid var(--border);

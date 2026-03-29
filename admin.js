@@ -7,38 +7,65 @@
     const initialProducts = [
         {
             id: "p-1001",
-            name: "PlayDock 5 Console",
+            title: "PlayDock 5 Console",
+            price: 299.99,
+            discount: 20,
+            quantity: 25,
             description: "Latest gaming console with 4K support.",
+            specifications: "4K output, 1TB SSD, Wi-Fi 6, DualSense controller",
             category: "Gaming",
             brand: "PlayDock",
-            color: "White",
-            price: 299.99,
-            stock: 25,
             images: ["images/Playdock%205%20console.jpg", "images/silly%20cat.jpg"]
         },
         {
             id: "p-1002",
-            name: "UltraBook Pro 15",
+            title: "UltraBook Pro 15",
+            price: 349.99,
+            discount: 10,
+            quantity: 16,
             description: "Slim performance laptop for work and study.",
+            specifications: "15 inch display, 16GB RAM, 512GB SSD, Intel Core i7",
             category: "Computers",
             brand: "ElectroHub",
-            color: "Gray",
-            price: 349.99,
-            stock: 16,
-            images: ["images/ultrabook%20pro.jpg", "images/USB%20C%20HUB.jpg"]
+            images: ["images/ultrabook%20pro.jpg"]
         },
         {
             id: "p-1003",
-            name: "SmartPhone X12",
+            title: "SmartPhone X12",
+            price: 395.99,
+            discount: 15,
+            quantity: 42,
             description: "Fast smartphone with a great OLED display.",
+            specifications: "6.7 inch OLED, 128GB storage, 5G, 50MP camera",
             category: "Phones",
             brand: "XMobile",
-            color: "Black",
-            price: 395.99,
-            stock: 42,
             images: ["images/smartphone%20x12.jpg", "images/silly%20cat.jpg"]
         }
     ];
+
+    function getSelectedImageNames(fileInput) {
+        return Array.from(fileInput.files || []).map((file) => file.name);
+    }
+
+    function renderImagePreview(previewEl, images) {
+        if (!previewEl) {
+            return;
+        }
+
+        previewEl.innerHTML = "";
+        if (!images.length) {
+            const emptyItem = document.createElement("li");
+            emptyItem.textContent = "No images selected";
+            previewEl.appendChild(emptyItem);
+            return;
+        }
+
+        images.forEach((imageName) => {
+            const item = document.createElement("li");
+            item.textContent = imageName;
+            previewEl.appendChild(item);
+        });
+    }
 
     function safeParse(json, fallback) {
         try {
@@ -156,13 +183,21 @@
         emptyState.hidden = true;
 
         products.forEach((product) => {
+            const title = product.title || product.name || "Untitled";
+            const category = product.category || "-";
+            const brand = product.brand || "-";
+            const price = Number(product.price);
+            const discount = Number(product.discount || 0);
+            const quantity = Number(product.quantity || 0);
+
             const row = document.createElement("tr");
             row.innerHTML = ""
-                + "<td><img src='" + product.images[0] + "' alt='" + product.name + "' class='admin-thumb'></td>"
-                + "<td><strong>" + product.name + "</strong><div class='admin-table-sub'>" + product.category + "</div></td>"
-                + "<td>" + product.brand + "</td>"
-                + "<td>$" + Number(product.price).toFixed(2) + "</td>"
-                + "<td>" + Number(product.stock) + "</td>"
+                + "<td><strong>" + title + "</strong></td>"
+                + "<td>" + category + "</td>"
+                + "<td>" + brand + "</td>"
+                + "<td>$" + (Number.isFinite(price) ? price.toFixed(2) : "0.00") + "</td>"
+                + "<td>" + (Number.isFinite(discount) ? discount : 0) + "%</td>"
+                + "<td>" + (Number.isFinite(quantity) ? quantity : 0) + "</td>"
                 + "<td>"
                 + "<a href='admin-product-form.html?id=" + encodeURIComponent(product.id) + "' class='admin-table-action'>Edit</a>"
                 + "<button type='button' class='admin-table-action danger js-delete-product' data-id='" + product.id + "'>Delete</button>"
@@ -196,6 +231,15 @@
         const title = document.getElementById("admin-form-title");
         const submitBtn = document.getElementById("admin-form-submit");
         const feedback = document.getElementById("admin-form-feedback");
+        const imagesInput = document.getElementById("product-images");
+        const imagesPreview = document.getElementById("product-images-preview");
+        let existingImages = [];
+
+        if (imagesInput) {
+            imagesInput.addEventListener("change", () => {
+                renderImagePreview(imagesPreview, getSelectedImageNames(imagesInput));
+            });
+        }
 
         if (productId) {
             const existing = getProducts().find((product) => product.id === productId);
@@ -203,16 +247,19 @@
                 title.textContent = "Edit product";
                 submitBtn.textContent = "Save changes";
 
-                document.getElementById("product-name").value = existing.name;
+                document.getElementById("product-title").value = existing.title || existing.name || "";
+                document.getElementById("product-price").value = existing.price;
+                document.getElementById("product-discount").value = Number(existing.discount || 0);
+                document.getElementById("product-quantity").value = Number(existing.quantity || 0);
                 document.getElementById("product-description").value = existing.description;
+                document.getElementById("product-specifications").value = existing.specifications || "";
                 document.getElementById("product-category").value = existing.category;
                 document.getElementById("product-brand").value = existing.brand;
-                document.getElementById("product-color").value = existing.color;
-                document.getElementById("product-price").value = existing.price;
-                document.getElementById("product-stock").value = existing.stock;
-                document.getElementById("product-image-1").value = existing.images[0] || "";
-                document.getElementById("product-image-2").value = existing.images[1] || "";
+                existingImages = Array.isArray(existing.images) ? existing.images : [];
+                renderImagePreview(imagesPreview, existingImages);
             }
+        } else {
+            renderImagePreview(imagesPreview, []);
         }
 
         form.addEventListener("submit", (event) => {
@@ -222,26 +269,28 @@
 
             const productData = {
                 id: productId || "p-" + Date.now(),
-                name: document.getElementById("product-name").value.trim(),
+                title: document.getElementById("product-title").value.trim(),
+                price: Number(document.getElementById("product-price").value),
+                discount: Number(document.getElementById("product-discount").value),
+                quantity: Number(document.getElementById("product-quantity").value),
                 description: document.getElementById("product-description").value.trim(),
+                specifications: document.getElementById("product-specifications").value.trim(),
                 category: document.getElementById("product-category").value.trim(),
                 brand: document.getElementById("product-brand").value.trim(),
-                color: document.getElementById("product-color").value.trim(),
-                price: Number(document.getElementById("product-price").value),
-                stock: Number(document.getElementById("product-stock").value),
-                images: [
-                    document.getElementById("product-image-1").value.trim(),
-                    document.getElementById("product-image-2").value.trim()
-                ]
+                images: []
             };
 
-            const basicFieldsFilled = productData.name
-                && productData.description
-                && productData.category
-                && productData.brand
-                && productData.color
+            const selectedImageNames = imagesInput ? getSelectedImageNames(imagesInput) : [];
+            productData.images = selectedImageNames.length ? selectedImageNames : existingImages;
+
+            const basicFieldsFilled = productData.title
                 && Number.isFinite(productData.price)
-                && Number.isFinite(productData.stock);
+                && Number.isFinite(productData.discount)
+                && Number.isFinite(productData.quantity)
+                && productData.description
+                && productData.specifications
+                && productData.category
+                && productData.brand;
 
             if (!basicFieldsFilled) {
                 feedback.textContent = "Please fill in all required fields.";
@@ -249,8 +298,14 @@
                 return;
             }
 
-            if (productData.images.some((path) => !path)) {
-                feedback.textContent = "A product must include at least 2 photos.";
+            if (productData.discount < 0 || productData.discount > 100) {
+                feedback.textContent = "Discount must be between 0 and 100.";
+                feedback.classList.add("error");
+                return;
+            }
+
+            if (productData.quantity < 0) {
+                feedback.textContent = "Quantity must be 0 or higher.";
                 feedback.classList.add("error");
                 return;
             }
