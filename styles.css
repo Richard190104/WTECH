@@ -520,11 +520,16 @@ header {
 
 .product-card-actions {
 	display: grid;
-	grid-template-columns: 3fr 1fr 1fr;
+	grid-template-columns: 1fr;
 	gap: var(--spacing-sm);
 	padding-top: var(--spacing-md);
 	border-top: 1px solid var(--border);
 }
+
+.pdp-thumb {
+	border: none;
+}
+
 
 .product-view-btn {
 	width: 100%;
@@ -668,52 +673,62 @@ header {
    ============================================ */
 
 .footer-wrap {
-	background: var(--secondary);
-	color: rgba(255, 255, 255, 0.8);
+	background: #e5e7eb;
+	color: #374151;
 	margin-top: var(--spacing-xl);
-	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid #d1d5db;
 }
 
 .footer-content {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	gap: var(--spacing-md);
-	padding: var(--spacing-lg) 0;
-}
-
-.footer-content section {
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-lg);
+	padding: 14px 0;
 }
 
-.footer-content h3 {
-	color: white;
-	font-weight: 700;
-	margin: 0 0 var(--spacing-sm) 0;
-	font-size: 0.9rem;
+.footer-nav-links {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-lg);
+	flex-wrap: wrap;
 }
 
-.footer-content p {
-	margin: var(--spacing-xs) 0;
-	font-size: 0.8rem;
-	cursor: pointer;
+.footer-nav-links a {
+	color: #1f2937;
+	text-decoration: none;
+	font-size: 1rem;
+	font-weight: 500;
 	transition: var(--transition);
 }
 
-.footer-content p:hover {
-	color: white;
-	text-decoration: underline;
+.footer-nav-links a:hover {
+	color: var(--primary);
 }
 
-.footer-logo-box {
-	color: var(--accent);
+.footer-brand {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-sm);
+	color: #111827;
 	font-weight: 700;
-	font-size: 1rem;
-	text-align: center;
-	grid-column: 1 / -1;
-	padding-top: var(--spacing-md);
-	border-top: 1px solid rgba(255, 255, 255, 0.1);
-	padding-bottom: var(--spacing-sm);
+	font-size: 1.05rem;
+}
+
+.footer-meta {
+	color: #4b5563;
+	font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+	.footer-content {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.footer-nav-links {
+		gap: var(--spacing-md);
+	}
 }
 
 /* ============================================
@@ -927,13 +942,15 @@ header {
 }
 
 .continue-btn {
-	width: 100%;
 	border: 2px solid #4b5a70;
 	background: #4b5a70;
+	justify-content: center;
+	align-items: center;
 	color: #f0f4fc;
 	font-size: 1.4rem;
 	font-weight: 700;
 	padding: 0.65rem;
+	display: flex;
 }
 
 .continue-btn:hover {
@@ -1324,11 +1341,6 @@ header {
    DELIVERY DETAILS PAGE
    ============================================ */
 
-.delivery-layout {
-	display: grid;
-	grid-template-columns: 1fr 340px;
-	gap: var(--spacing-lg);
-}
 
 .delivery-form {
 	background: var(--surface);
@@ -1428,9 +1440,6 @@ header {
    ============================================ */
 
 @media (max-width: 992px) {
-	.delivery-layout {
-		grid-template-columns: 1fr;
-	}
 
 	.order-summary {
 		position: static;

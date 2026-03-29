@@ -21,9 +21,10 @@ function initShippingPaymentPage() {
     const summaryShipping = document.getElementById("summary-shipping");
     const summaryTotal = document.getElementById("summary-total");
     const continueButton = document.getElementById("continue-to-delivery");
+    const backButton = document.getElementById("back-to-cart");
     const feedback = document.getElementById("checkout-feedback");
 
-    if (!shippingInputs.length || !paymentInputs.length || !summarySubtotal || !summaryVat || !summaryShipping || !summaryTotal || !continueButton || !feedback) {
+    if (!shippingInputs.length || !paymentInputs.length || !summarySubtotal || !summaryVat || !summaryShipping || !summaryTotal || !backButton || !continueButton || !feedback) {
         return;
     }
 
@@ -82,6 +83,10 @@ function initShippingPaymentPage() {
 
         localStorage.setItem("electrohub_checkout", JSON.stringify(checkoutData));
         window.location.href = "delivery-details.html";
+    });
+
+    backButton.addEventListener("click", () => {
+        window.location.href = "cart.html";
     });
 
     updateSummary();
