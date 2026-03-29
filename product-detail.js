@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const thumbs = document.querySelectorAll(".pdp-thumb");
     const tabButtons = document.querySelectorAll(".pdp-tab");
     const infoPanel = document.getElementById("pdp-info-panel");
-    const relatedButtons = document.querySelectorAll(".pdp-related-btn");
 
     if (!qtyValue || !qtyDecrease || !qtyIncrease || !feedback || !mainImage || !infoPanel) {
         return;
@@ -92,12 +91,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addToWishlistBtn.addEventListener("click", () => {
         showFeedback("Saved to wishlist.", "info");
-    });
-
-    relatedButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            const productName = button.dataset.relatedProduct || "Related product";
-            showFeedback(productName + " added to cart.", "success");
-        });
     });
 });
