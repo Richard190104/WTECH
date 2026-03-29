@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroHub - Admin Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="shop-page">
+    <div class="page-shell admin-page-shell">
+        <header class="admin-topbar">
+            <div class="container-xl admin-topbar-inner">
+                <a href="admin-products.html" class="admin-brand">ElectroHub Admin</a>
+                <div class="admin-topbar-actions">
+                    <a class="admin-btn admin-btn-secondary" href="admin-products.html">
+                        <i class="fas fa-list"></i> Product list
+                    </a>
+
+                </div>
+            </div>
+        </header>
+
+        <main class="container-xl py-4">
+            <section class="admin-panel" aria-labelledby="admin-form-title">
+                <h1 id="admin-form-title" class="admin-title">Add product</h1>
+                <p class="admin-subtitle">Fill in title, price, discount, quantity, description, specifications, brand, category, and upload images.</p>
+
+                <form id="admin-product-form" class="admin-form-grid" novalidate>
+                    <div class="admin-form-field admin-col-2">
+                        <label for="product-title">Title</label>
+                        <input type="text" id="product-title" class="admin-input" required>
+                    </div>
+
+                    <div class="admin-form-field">
+                        <label for="product-price">Price ($)</label>
+                        <input type="number" id="product-price" class="admin-input" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="admin-form-field">
+                        <label for="product-discount">Discount (%)</label>
+                        <input type="number" id="product-discount" class="admin-input" min="0" max="100" step="1" required>
+                    </div>
+
+                    <div class="admin-form-field">
+                        <label for="product-quantity">Quantity</label>
+                        <input type="number" id="product-quantity" class="admin-input" min="0" step="1" required>
+                    </div>
+
+                    <div class="admin-form-field admin-col-2">
+                        <label for="product-description">Description</label>
+                        <textarea id="product-description" class="admin-input admin-textarea" rows="4" required></textarea>
+                    </div>
+
+                    <div class="admin-form-field admin-col-2">
+                        <label for="product-specifications">Specifications</label>
+                        <textarea id="product-specifications" class="admin-input admin-textarea" rows="4" required></textarea>
+                    </div>
+
+                    <div class="admin-form-field">
+                        <label for="product-category">Category</label>
+                        <select id="product-category" class="admin-input" required>
+                            <option value="">Select category</option>
+                            <option value="Computers">Computers</option>
+                            <option value="Gaming">Gaming</option>
+                            <option value="Phones">Phones</option>
+                            <option value="Accessories">Accessories</option>
+                        </select>
+                    </div>
+
+                    <div class="admin-form-field">
+                        <label for="product-brand">Brand</label>
+                        <input type="text" id="product-brand" class="admin-input" required>
+                    </div>
+
+                    <div class="admin-form-field admin-col-2">
+                        <label for="product-images">Images</label>
+                        <input type="file" id="product-images" class="admin-input" accept="image/*" multiple>
+                        <p class="admin-field-note">Frontend demo only: files are not uploaded to a server.</p>
+                        <ul id="product-images-preview" class="admin-file-list" aria-live="polite"></ul>
+                    </div>
+
+                    <p id="admin-form-feedback" class="admin-feedback admin-col-2" aria-live="polite"></p>
+
+                    <div class="admin-form-actions admin-col-2">
+                        <a href="admin-products.html" class="admin-btn admin-btn-secondary">Cancel</a>
+                        <button id="admin-form-submit" type="submit" class="admin-btn admin-btn-primary">Save product</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
