@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput2 = document.getElementById('confirm-password');
     const toggleBtn1 = document.getElementById('toggle-password-1');
     const toggleBtn2 = document.getElementById('toggle-password-2');
+    const apiBaseUrl = 'http://127.0.0.1:8000/api';
 
     // Password visibility toggles
     toggleBtn1.addEventListener('click', (e) => {
@@ -26,13 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         feedback.textContent = message;
         feedback.className = 'login-feedback ' + type;
         feedback.style.display = 'block';
-        setTimeout(() => {
-            feedback.style.display = 'none';
-        }, 3500);
     }
 
     // Form validation and submission
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const firstName = document.getElementById('first-name').value.trim();
@@ -68,16 +66,45 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Simulate registration
         const btn = document.getElementById('register-btn');
         btn.disabled = true;
+        const originalButtonHtml = btn.innerHTML;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
 
-        setTimeout(() => {
+        try {
+            const response = await fetch(`${apiBaseUrl}/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    email,
+                    password,
+                    password_confirmation: confirmPassword,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                const firstError = data?.errors ? Object.values(data.errors)[0]?.[0] : data?.message;
+                throw new Error(firstError || 'Registration failed.');
+            }
+
+            localStorage.setItem('electrohub_user', JSON.stringify(data.user));
             showFeedback('Account created successfully! Redirecting...', 'success');
+
             setTimeout(() => {
                 window.location.href = 'login.html';
-            }, 1500);
-        }, 1200);
+            }, 1200);
+        } catch (error) {
+            showFeedback(error.message, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalButtonHtml;
+        }
     });
 });
