@@ -154,48 +154,6 @@
 </footer>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('login-form');
-            const feedback = document.getElementById('login-feedback');
-            const toggleBtn = document.getElementById('toggle-password');
-            const pwInput = document.getElementById('login-password');
-            const pwIcon = document.getElementById('toggle-pw-icon');
-
-            toggleBtn.addEventListener('click', () => {
-                const isText = pwInput.type === 'text';
-                pwInput.type = isText ? 'password' : 'text';
-                pwIcon.classList.toggle('fa-eye', isText);
-                pwIcon.classList.toggle('fa-eye-slash', !isText);
-            });
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const email = document.getElementById('login-email').value.trim();
-                const password = document.getElementById('login-password').value;
-
-                feedback.className = 'login-feedback';
-                feedback.textContent = '';
-
-                if (!email || !password) {
-                    feedback.textContent = 'Please fill in all fields.';
-                    feedback.classList.add('error');
-                    return;
-                }
-
-                // Placeholder — replace with real auth logic
-                feedback.textContent = 'Signing in...';
-                feedback.classList.add('info');
-
-                setTimeout(() => {
-                    feedback.textContent = 'Login successful! Redirecting...';
-                    feedback.classList.remove('info');
-                    feedback.classList.add('success');
-                    setTimeout(() => { window.location.href = 'index.html'; }, 1000);
-                }, 800);
-            });
-        });
-    </script>
+    <script src="login.js"></script>
 </body>
 </html>
