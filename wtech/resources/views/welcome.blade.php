@@ -87,7 +87,7 @@
                                         <button
                                             type="button"
                                             class="product-view-btn"
-                                            onclick="event.stopPropagation();"
+                                            onclick="window.location='{{ route('products.show', $product->id) }}'"
                                         >
                                              View
                                         </button>
@@ -178,9 +178,9 @@
                                 <button
                                     type="button"
                                     class="product-view-btn"
-                                    onclick="event.stopPropagation();"
+                                    onclick="window.location='{{ route('products.show', $product->id) }}'"
                                 >
-                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                    View
                                 </button>
                             </div>
                         </div>

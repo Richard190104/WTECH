@@ -247,7 +247,7 @@
                                     <button
                                         type="button"
                                         class="product-view-btn"
-                                        onclick="event.stopPropagation();"
+                                        onclick="window.location='{{ route('products.show', $product->id) }}'"
                                     >
                                          View
                                     </button>
