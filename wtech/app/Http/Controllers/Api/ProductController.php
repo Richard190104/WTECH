@@ -73,9 +73,21 @@ class ProductController extends Controller
         if ($request->filled('q')) {
             $needle = trim((string) $request->input('q'));
             $query->where(function ($subQuery) use ($needle) {
-                $subQuery->where('products.title', 'like', '%' . $needle . '%')
-                    ->orWhere('products.description', 'like', '%' . $needle . '%')
-                    ->orWhere('products.specifications', 'like', '%' . $needle . '%');
+                $subQuery->whereRaw(
+                    "to_tsvector('simple', " .
+                    "coalesce(products.title, '') || ' ' || " .
+                    "coalesce(products.description, '') || ' ' || " .
+                    "coalesce(products.specifications, '') || ' ' || " .
+                    "coalesce(brands.name, '') || ' ' || " .
+                    "coalesce(categories.name, '')" .
+                    ") @@ plainto_tsquery('simple', ?)",
+                    [$needle]
+                )
+                ->orWhere('products.title', 'like', '%' . $needle . '%')
+                ->orWhere('products.description', 'like', '%' . $needle . '%')
+                ->orWhere('products.specifications', 'like', '%' . $needle . '%')
+                ->orWhere('brands.name', 'like', '%' . $needle . '%')
+                ->orWhere('categories.name', 'like', '%' . $needle . '%');
             });
         }
 

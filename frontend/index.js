@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const featuredGrid = document.getElementById('home-featured-grid');
     const trendingGrid = document.getElementById('home-trending-grid');
+    const homeSearchInput = document.querySelector('.neutral-search');
 
     if (!featuredGrid || !trendingGrid || !window.electrohubApi) {
         return;
@@ -63,6 +64,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             ? products.map(cardTemplate).join('')
             : '<div class="col-12"><div class="card p-4">No products found.</div></div>';
     };
+
+    if (homeSearchInput) {
+        homeSearchInput.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter') {
+                return;
+            }
+
+            event.preventDefault();
+            const term = homeSearchInput.value.trim();
+            const params = new URLSearchParams();
+
+            if (term !== '') {
+                params.set('q', term);
+            }
+
+            window.location.href = `product-list.html${params.toString() ? `?${params.toString()}` : ''}`;
+        });
+    }
 
     try {
         const response = await window.electrohubApi.get('/products', { per_page: 10, sort: 'newest' });
