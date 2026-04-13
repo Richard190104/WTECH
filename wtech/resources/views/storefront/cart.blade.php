@@ -134,7 +134,7 @@
                     <strong>€{{ number_format($total, 2) }}</strong>
                 </div>
 
-                <a class="continue-btn {{ count($cartItems) === 0 ? 'disabled' : '' }}">
+                <a class="continue-btn {{ count($cartItems) === 0 ? 'disabled' : '' }}" href="{{ route('shipping') }}" >
                     Continue to Shipping
                 </a>
 

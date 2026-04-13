@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\CheckoutController;
 Route::get('/', [ProductController::class, 'home'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
@@ -38,3 +38,8 @@ Route::post('/cart/add/{productId}', [CartController::class, 'add'])->name('cart
 Route::post('/cart/update/{productId}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/set-quantity/{productId}', [CartController::class, 'setQuantity'])->name('cart.setQuantity');
+
+Route::get('/checkout/shipping', [CheckoutController::class, 'shipping'])->name('shipping');
+Route::post('/checkout/shipping', [CheckoutController::class, 'storeShipping'])->name('shipping.store');
+Route::get('/checkout/delivery', [CheckoutController::class, 'delivery'])->name('delivery');
+Route::post('/checkout/delivery', [CheckoutController::class, 'storeDelivery'])->name('delivery.store');

@@ -52,7 +52,7 @@
                             >
                                 <div style="position: relative;">
                                     <img
-                                        src="{{ $product->image_path ? asset($product->image_path) : asset('images/placeholder.png') }}"
+                                        src="{{ $product->image_path ? asset($product->image_path) : '' }}"
                                         alt="{{ $product->image_alt ?? $product->title }}"
                                         loading="lazy"
                                     >
@@ -143,7 +143,7 @@
                     >
                         <div style="position: relative;">
                             <img
-                                src="{{ $product->image_path ? asset($product->image_path) : asset('images/placeholder.png') }}"
+                                src="{{ $product->image_path ? asset($product->image_path) : '' }}"
                                 alt="{{ $product->image_alt ?? $product->title }}"
                                 loading="lazy"
                             >
