@@ -23,12 +23,8 @@
                 </ul>
             </nav>
 
-            <form class="d-flex align-items-center gap-2 auth-form" action="#">
-                <input type="email" class="form-control form-control-sm neutral-input" placeholder="email" aria-label="email">
-                <input type="password" class="form-control form-control-sm neutral-input" placeholder="password" aria-label="password">
-                <button type="submit" class="btn btn-sm neutral-btn">Login</button>
-                <a href="register.html" class="small register-link">Register</a>
-            </form>
+            <a href="login.html" class="small register-link">Login</a>
+            <a href="register.html" class="small register-link">Register</a>
         </div>
     </div>
 
@@ -68,73 +64,46 @@
 </header>
 
         <main class="container-xl mt-3 pb-5">
-            <nav class="pdp-breadcrumb" aria-label="Breadcrumb">
+            <nav class="pdp-breadcrumb" aria-label="Breadcrumb" id="pdp-breadcrumb">
                 <a href="index.html"><i class="fas fa-home"></i> Home</a>
                 <span>&gt;</span>
-                <a href="#">Computers &amp; Electronics</a>
-                <span>&gt;</span>
-                <a href="#">Laptops</a>
-                <span>&gt;</span>
-                <span>HP ProBook 450</span>
+                <span></span>
             </nav>
 
             <section class="row g-4">
                 <div class="col-12 col-lg-6">
                     <div class="pdp-main-image" id="pdp-main-image" aria-live="polite">
-                        <img src="images/HP-ProBook-450-G9_0b.jpg" alt="HP ProBook 450" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="images/Playdock 5 console.jpg" alt="Product image" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                    <div class="pdp-thumbs" aria-label="Product images">
-                        <button type="button" class="pdp-thumb is-active" data-image="Front View" aria-label="Front view">
-                            <img src="images/HP-ProBook-450-G9_0b.jpg" alt="Front View" style="width: 100%; height: 100%; object-fit: cover;">
-                        </button>
-                        <button type="button" class="pdp-thumb" data-image="Side View" aria-label="Side view">
-                            <img src="images/HP-ProBook-450-G9_0b.jpg" alt="Side View" style="width: 100%; height: 100%; object-fit: cover;">
-                        </button>
-                        <button type="button" class="pdp-thumb" data-image="Keyboard" aria-label="Keyboard closeup">
-                            <img src="images/HP-ProBook-450-G9_0b.jpg" alt="Keyboard" style="width: 100%; height: 100%; object-fit: cover;">
-                        </button>
-                        <button type="button" class="pdp-thumb" data-image="Details" aria-label="Details view">
-                            <img src="images/HP-ProBook-450-G9_0b.jpg" alt="Details" style="width: 100%; height: 100%; object-fit: cover;">
-                        </button>
-                    </div>
+                    <div class="pdp-thumbs" aria-label="Product images"></div>
                 </div>
 
                 <div class="col-12 col-lg-6">
                     <div style="background: var(--bg); padding: var(--spacing-lg); border-radius: var(--radius-lg); border: 1px solid var(--border);">
-                        <div style="display: flex; gap: var(--spacing-sm); align-items: center; margin-bottom: var(--spacing-md);">
-                            <span style="background: var(--success); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">IN STOCK</span>
+                        <div style="display: flex; gap: var(--spacing-sm); align-items: center; margin-bottom: var(--spacing-md); flex-wrap: wrap;">
+                            <span id="pdp-stock-badge" style="background: var(--success); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;"></span>
                             <span style="color: var(--text-secondary); font-size: 0.85rem;"><i class="fas fa-shipping-fast"></i> Free Shipping on Orders Over $50</span>
                         </div>
 
-                        <h1 class="pdp-title">HP ProBook 450 G9</h1>
+                        <h1 class="pdp-title"></h1>
                         
-                        <p class="pdp-rating">
-                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
-                            4.8 out of 5 (42 reviews)
-                            <a href="#" style="margin-left: var(--spacing-md); color: var(--primary);">See all reviews</a>
+                        <p class="pdp-rating" id="pdp-rating">
+                            <span class="stars"></span>
                         </p>
 
                         <div style="margin: var(--spacing-lg) 0; padding: var(--spacing-lg) 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
                             <div style="display: flex; align-items: baseline; gap: var(--spacing-md); margin-bottom: var(--spacing-sm);">
-                                <p class="pdp-price" style="margin: 0;">$899.99</p>
-                                <span style="text-decoration: line-through; color: var(--text-secondary); font-size: 1rem;">$1,099.99</span>
-                                <span style="background: var(--danger); color: white; padding: 4px 12px; border-radius: 4px; font-weight: 700; font-size: 0.85rem;">Save 18%</span>
+                                <p class="pdp-price" style="margin: 0;">$0.00</p>
+                                <span id="pdp-base-price" style="text-decoration: line-through; color: var(--text-secondary); font-size: 1rem; display: none;"></span>
+                                <span id="pdp-discount-badge" style="background: var(--danger); color: white; padding: 4px 12px; border-radius: 4px; font-weight: 700; font-size: 0.85rem; display: none;"></span>
                             </div>
                         </div>
 
-                        <p class="pdp-description">
-                            Professional laptop designed for business users. Features the latest Intel processor, ample memory, and a stunning display. Perfect for productivity and multitasking.
-                        </p>
+                        <p class="pdp-description"></p>
 
                         <section class="pdp-spec-box" aria-label="Key specifications">
                             <h2>Key Specifications</h2>
-                            <div class="pdp-spec-row"><span>Processor:</span><strong>Intel Core i7-1255U (10 cores)</strong></div>
-                            <div class="pdp-spec-row"><span>RAM:</span><strong>16GB DDR4</strong></div>
-                            <div class="pdp-spec-row"><span>Storage:</span><strong>512GB SSD NVMe</strong></div>
-                            <div class="pdp-spec-row"><span>Display:</span><strong>14" FHD (1920x1080)</strong></div>
-                            <div class="pdp-spec-row"><span>Graphics:</span><strong>Intel Iris Xe</strong></div>
-                            <div class="pdp-spec-row"><span>Battery:</span><strong>Up to 12 hours</strong></div>
-                            <div class="pdp-spec-row"><span>Warranty:</span><strong>2 Years</strong></div>
+                            <div id="pdp-spec-rows"></div>
                         </section>
 
                         <div class="pdp-actions">
@@ -175,26 +144,15 @@
                 <div class="pdp-tabs" role="tablist" aria-label="Product info tabs">
                     <button class="pdp-tab active" data-tab="description" type="button">Description</button>
                     <button class="pdp-tab" data-tab="specifications" type="button">Specifications</button>
-                    <button class="pdp-tab" data-tab="reviews" type="button">Reviews (42)</button>
+                    <button class="pdp-tab" data-tab="reviews" type="button">Reviews (0)</button>
                 </div>
                 <div class="pdp-info-panel" id="pdp-info-panel">
-                    <h3>About This Product</h3>
-                    <p>
-                        The HP ProBook 450 G9 is a powerful business laptop designed for professionals who demand reliability and performance. With its latest Intel processor and ample RAM, it handles multitasking with ease.
-                    </p>
-                    <h4 style="margin-top: var(--spacing-lg);">Key Features:</h4>
-                    <ul style="color: var(--text-secondary);">
-                        <li>Lightweight and portable design for business travelers</li>
-                        <li>Long battery life keeps you productive all day</li>
-                        <li>Secure boot and encryption features</li>
-                        <li>Thunderbolt 4 for fast data transfer</li>
-                        <li>Fingerprint reader for enhanced security</li>
-                        <li>Professional-grade build quality</li>
-                    </ul>
-                    <p style="margin-top: var(--spacing-lg); color: var(--text-secondary);">
-                        Perfect for office work, video conferencing, spreadsheets, and creative applications. Backed by HP's 2-year warranty and professional support.
-                    </p>
                 </div>
+            </section>
+
+            <section class="mt-5">
+                <h2 class="section-title">Related Products</h2>
+                <div class="row g-3" id="related-products-grid"></div>
             </section>
         </main>
 
@@ -214,6 +172,7 @@
     </div>
 
     <script src="api.js"></script>
+    <script src="auth.js"></script>
     <script src="product-detail.js"></script>
 </body>
 </html>

@@ -8,12 +8,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     const thumbsContainer = document.querySelector('.pdp-thumbs');
     const tabButtons = document.querySelectorAll('.pdp-tab');
     const infoPanel = document.getElementById('pdp-info-panel');
-    const breadcrumb = document.querySelector('.pdp-breadcrumb');
+    const breadcrumb = document.getElementById('pdp-breadcrumb');
     const titleEl = document.querySelector('.pdp-title');
-    const ratingEl = document.querySelector('.pdp-rating');
+    const ratingEl = document.getElementById('pdp-rating');
     const priceEl = document.querySelector('.pdp-price');
+    const basePriceEl = document.getElementById('pdp-base-price');
+    const discountBadgeEl = document.getElementById('pdp-discount-badge');
     const descriptionEl = document.querySelector('.pdp-description');
     const specBox = document.querySelector('.pdp-spec-box');
+    const stockBadge = document.getElementById('pdp-stock-badge');
+    const relatedGrid = document.getElementById('related-products-grid');
 
     if (!qtyValue || !qtyDecrease || !qtyIncrease || !feedback || !mainImage || !infoPanel || !window.electrohubApi) {
         return;
@@ -49,6 +53,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         return html;
     };
 
+    const renderRichTextLines = (value) => {
+        const lines = String(value || '')
+            .split(/\n|,|;/)
+            .map((line) => line.trim())
+            .filter(Boolean);
+
+        return lines;
+    };
+
     function showFeedback(message, variant) {
         feedback.textContent = message;
         feedback.classList.remove('success', 'info');
@@ -64,10 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const renderSpecificationRows = (specifications) => {
-        const lines = String(specifications || '')
-            .split(/\n|,|;/)
-            .map((line) => line.trim())
-            .filter(Boolean);
+        const lines = renderRichTextLines(specifications);
 
         if (!lines.length) {
             return '<p>No specifications available.</p>';
@@ -81,25 +91,70 @@ document.addEventListener('DOMContentLoaded', async () => {
             return '<p>No reviews yet.</p>';
         }
 
-        return reviews.map((review) => `<p><strong>${review.rating}/5</strong> - ${escapeHtml(review.text || 'No review text.')} <small>${review.created_at || ''}</small></p>`).join('');
+        return reviews.map((review) => `
+            <div class="card p-3 mb-3">
+                <div class="d-flex justify-content-between align-items-center gap-2 mb-2">
+                    <strong>${review.rating}/5</strong>
+                    <small class="text-muted">${escapeHtml(review.created_at || '')}</small>
+                </div>
+                <p class="mb-0">${escapeHtml(review.text || 'No review text.')}</p>
+            </div>
+        `).join('');
     };
 
-    const updateTabContent = (key, product, reviews) => {
-        if (key === 'specifications') {
+    const renderDescription = (product) => {
+        const paragraphs = [
+            product.description,
+            product.specifications,
+        ].filter(Boolean);
+
+        if (!paragraphs.length) {
+            return '<p>No description available.</p>';
+        }
+
+        return `
+            <h3>About This Product</h3>
+            ${paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')}
+        `;
+    };
+
+    const setActiveTab = (tabName, product, reviews) => {
+        tabButtons.forEach((button) => {
+            button.classList.toggle('active', button.dataset.tab === tabName);
+        });
+
+        if (tabName === 'specifications') {
             infoPanel.innerHTML = renderSpecificationRows(product.specifications);
             return;
         }
 
-        if (key === 'reviews') {
+        if (tabName === 'reviews') {
             infoPanel.innerHTML = renderReviewContent(reviews);
             return;
         }
 
-        infoPanel.innerHTML = `
-            <h3>About This Product</h3>
-            <p>${escapeHtml(product.description || 'No description available.')}</p>
-            <h4 style="margin-top: var(--spacing-lg);">Key Features:</h4>
-            <p>${escapeHtml(product.specifications || 'No additional details available.')}</p>
+        infoPanel.innerHTML = renderDescription(product);
+    };
+
+    const renderRelatedProductCard = (item) => {
+        const imageSrc = window.electrohubApi.imageUrl(item.image_path);
+        return `
+            <div class="col-12 col-sm-6 col-lg-3">
+                <article class="product-card product-card-clickable js-related-product-card" data-product-url="product-detail.html?id=${item.id}" tabindex="0" role="button" aria-label="Open ${escapeHtml(item.title)} details">
+                    <div style="position: relative;">
+                        <img src="${imageSrc}" alt="${escapeHtml(item.image_alt || item.title)}" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">${renderStars(item.rating_avg)}</span>
+                            <span>(${item.review_count || 0})</span>
+                        </div>
+                        <h3>${escapeHtml(item.title)}</h3>
+                        <p>${escapeHtml(item.category_name)} · ${escapeHtml(item.brand_name)}</p>
+                        <strong>${formatPrice(item.price)}</strong>
+                    </div>
+                </article>
+            </div>
         `;
     };
 
@@ -119,8 +174,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const response = await window.electrohubApi.get(`/products/${productId}`);
         const product = response.product;
-        const images = Array.isArray(response.images) && response.images.length ? response.images : [{ image_path: product.image_path, alt_text: product.image_alt, is_title: true }];
+        const pricing = response.pricing || {};
+        const stock = response.stock || {};
+        const images = Array.isArray(response.images) && response.images.length
+            ? response.images
+            : [{ image_path: product.image_path, alt_text: product.image_alt, is_title: true }];
         const reviews = Array.isArray(response.reviews) ? response.reviews : [];
+        const relatedProducts = Array.isArray(response.related_products) ? response.related_products : [];
+
+        document.title = `${product.title} - ElectroHub`;
 
         if (breadcrumb) {
             breadcrumb.innerHTML = `
@@ -142,11 +204,30 @@ document.addEventListener('DOMContentLoaded', async () => {
             ratingEl.innerHTML = `
                 <span class="stars">${renderStars(product.rating_avg)}</span>
                 ${Number(product.rating_avg || 0).toFixed(1)} out of 5 (${product.review_count || 0} reviews)
+                <a href="#" id="pdp-see-reviews" style="margin-left: var(--spacing-md); color: var(--primary);">See all reviews</a>
             `;
         }
 
         if (priceEl) {
-            priceEl.textContent = formatPrice(product.price);
+            priceEl.textContent = formatPrice(pricing.final_price ?? product.price);
+        }
+
+        if (basePriceEl) {
+            if (pricing.discount_percent > 0) {
+                basePriceEl.textContent = formatPrice(pricing.base_price);
+                basePriceEl.style.display = 'inline';
+            } else {
+                basePriceEl.style.display = 'none';
+            }
+        }
+
+        if (discountBadgeEl) {
+            if (pricing.discount_percent > 0) {
+                discountBadgeEl.textContent = `Save ${Number(pricing.discount_percent).toFixed(0)}%`;
+                discountBadgeEl.style.display = 'inline-block';
+            } else {
+                discountBadgeEl.style.display = 'none';
+            }
         }
 
         if (descriptionEl) {
@@ -156,8 +237,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (specBox) {
             specBox.innerHTML = `
                 <h2>Key Specifications</h2>
-                ${renderSpecificationRows(product.specifications)}
+                <div id="pdp-spec-rows"></div>
             `;
+        }
+
+        const specRowsContainer = document.getElementById('pdp-spec-rows');
+        if (specRowsContainer) {
+            specRowsContainer.innerHTML = renderSpecificationRows(product.specifications);
+        }
+
+        if (stockBadge) {
+            stockBadge.textContent = stock.in_stock ? 'IN STOCK' : 'OUT OF STOCK';
+            stockBadge.style.background = stock.in_stock ? 'var(--success)' : 'var(--danger)';
         }
 
         const mainImageTag = mainImage.querySelector('img');
@@ -194,24 +285,47 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             button.addEventListener('click', () => {
-                tabButtons.forEach((item) => item.classList.remove('active'));
-                button.classList.add('active');
-                updateTabContent(button.dataset.tab || 'description', product, reviews);
+                setActiveTab(button.dataset.tab || 'description', product, reviews);
             });
         });
 
-        updateTabContent('description', product, reviews);
+        const seeReviewsLink = document.getElementById('pdp-see-reviews');
+        if (seeReviewsLink) {
+            seeReviewsLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                setActiveTab('reviews', product, reviews);
+            });
+        }
+
+        setActiveTab('description', product, reviews);
+
+        if (relatedGrid) {
+            relatedGrid.innerHTML = relatedProducts.length
+                ? relatedProducts.map(renderRelatedProductCard).join('')
+                : '<div class="col-12"><div class="card p-4">No related products found.</div></div>';
+
+            relatedGrid.querySelectorAll('.js-related-product-card').forEach((card) => {
+                card.addEventListener('click', (event) => {
+                    if (event.target.closest('button')) {
+                        return;
+                    }
+                    window.location.href = card.dataset.productUrl || 'product-detail.html';
+                });
+
+                card.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        window.location.href = card.dataset.productUrl || 'product-detail.html';
+                    }
+                });
+            });
+        }
 
         if (addToCartBtn) {
             addToCartBtn.addEventListener('click', () => {
                 const quantity = getQuantity();
                 showFeedback(`Added ${quantity} item(s) of ${product.title} to cart.`, 'success');
             });
-        }
-
-        const stockBadge = document.querySelector('.pdp-actions')?.previousElementSibling?.querySelector('span');
-        if (stockBadge) {
-            stockBadge.textContent = Number(product.qty || 0) > 0 ? 'IN STOCK' : 'OUT OF STOCK';
         }
     } catch (error) {
         infoPanel.innerHTML = '<p>Failed to load product details from the API.</p>';
