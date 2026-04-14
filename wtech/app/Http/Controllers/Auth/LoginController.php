@@ -3,44 +3,43 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function store(Request $request): JsonResponse
+    public function store(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
+            'remember' => ['nullable', 'boolean'],
         ]);
 
-        $user = User::where('email', $credentials['email'])->first();
+        $remember = (bool) ($credentials['remember'] ?? false);
 
-        if (! $user || ! Hash::check($credentials['password'], $user->password_hash)) {
-            return response()->json([
-                'message' => 'The provided credentials are incorrect.',
-            ], 422);
+        if (! Auth::attempt([
+            'email' => $credentials['email'],
+            'password' => $credentials['password'],
+        ], $remember)) {
+            return back()->withErrors([
+                'email' => 'The provided credentials are incorrect.',
+            ])->onlyInput('email');
         }
 
-        return response()->json([
-            'message' => 'Login successful.',
-            'user' => [
-                'id' => $user->id,
-                'first_name' => $user->first_name,
-                'last_name' => $user->last_name,
-                'email' => $user->email,
-                'role' => $user->role,
-            ],
-        ]);
+        $request->session()->regenerate();
+
+        return redirect()->intended('/');
     }
 
-    public function destroy(Request $request): JsonResponse
+    public function destroy(Request $request): RedirectResponse
     {
-        return response()->json([
-            'message' => 'Logged out successfully.',
-        ]);
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

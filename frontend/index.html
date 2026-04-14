@@ -23,12 +23,8 @@
                 </ul>
             </nav>
 
-            <form class="d-flex align-items-center gap-2 auth-form" action="#">
-                <input type="email" class="form-control form-control-sm neutral-input" placeholder="email" aria-label="email">
-                <input type="password" class="form-control form-control-sm neutral-input" placeholder="password" aria-label="password">
-                <button type="submit" class="btn btn-sm neutral-btn">Login</button>
-                <a href="register.html" class="small register-link">Register</a>
-            </form>
+            <a href="login.html" class="small register-link">Login</a>
+            <a href="register.html" class="small register-link">Register</a>
         </div>
     </div>
 
@@ -60,11 +56,8 @@
         <nav class="container-xl py-1">
             <ul class="list-unstyled d-flex flex-wrap gap-4 mb-0 category-links">
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="product-list.html"><i class="fas fa-laptop"></i> Computers</a></li>
-                <li><a href="product-list.html"><i class="fas fa-gamepad"></i> Gaming</a></li>
-                <li><a href="product-list.html"><i class="fas fa-mobile-alt"></i> Phones</a></li>
-                <li><a href="product-list.html"><i class="fas fa-headphones"></i> Accessories</a></li>
-                <li><a href="product-list.html"><i class="fas fa-tag"></i> Sale</a></li>
+                <li><a href="product-list.html"><i class="fas fa-laptop"></i> Products</a></li>
+
             </ul>
         </nav>
     </div>
@@ -94,140 +87,7 @@
                 <h2 class="section-title">Featured Products</h2>
                 <div class="row g-3">
                     <div class="col-12 col-lg-9">
-                        <div class="row g-3">
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open PlayDock 5 Console details">
-                                    <div style="position: relative;">
-                                        <img src="images/Playdock%205%20console.jpg" alt="Gaming Console" loading="lazy">
-                                        <span class="product-discount-badge">-20%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating">
-                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
-                                            <span>(128)</span>
-                                        </div>
-                                        <h3>PlayDock 5 Console</h3>
-                                        <p>Latest gaming console with 4K support</p>
-                                        <strong>$299.99</strong>
-                                        <div class="product-card-actions">
-                                            <button type="button" class="product-view-btn js-home-add-btn" data-product="PlayDock 5 Console">
-                                                <i class="fas fa-cart-plus"></i> Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open UltraBook Pro 15 details">
-                                    <div style="position: relative;">
-                                        <img src="images/ultrabook%20pro.jpg" alt="UltraBook Pro" loading="lazy">
-                                        <span class="product-discount-badge">-15%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating">
-                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
-                                            <span>(256)</span>
-                                        </div>
-                                        <h3>UltraBook Pro 15</h3>
-                                        <p>High performance laptop for professionals</p>
-                                        <strong>$1,299.99</strong>
-                                        <div class="product-card-actions">
-                                            <button type="button" class="product-view-btn js-home-add-btn" data-product="UltraBook Pro 15">
-                                                <i class="fas fa-cart-plus"></i> Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open SmartPhone X12 details">
-                                    <div style="position: relative;">
-                                        <img src="images/smartphone%20x12.jpg" alt="SmartPhone X12" loading="lazy">
-                                        <span class="product-discount-badge">-10%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating">
-                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
-                                            <span>(89)</span>
-                                        </div>
-                                        <h3>SmartPhone X12</h3>
-                                        <p>5G enabled smartphone with triple camera</p>
-                                        <strong>$899.99</strong>
-                                        <div class="product-card-actions">
-                                            <button type="button" class="product-view-btn js-home-add-btn" data-product="SmartPhone X12">
-                                                <i class="fas fa-cart-plus"></i> Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open Wireless Headset Pro details">
-                                    <div style="position: relative;">
-                                        <img src="images/silly%20cat.jpg" alt="Wireless Headset" loading="lazy">
-                                        <span class="product-discount-badge">-30%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating">
-                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
-                                            <span>(342)</span>
-                                        </div>
-                                        <h3>Wireless Headset Pro</h3>
-                                        <p>Active noise cancellation, 30h battery</p>
-                                        <strong>$199.99</strong>
-                                        <div class="product-card-actions">
-                                            <button type="button" class="product-view-btn js-home-add-btn" data-product="Wireless Headset Pro">
-                                                <i class="fas fa-cart-plus"></i> Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open Gaming Mouse RGB details">
-                                    <div style="position: relative;">
-                                        <img src="images/silly%20cat.jpg" alt="Gaming Mouse" loading="lazy">
-                                        <span class="product-discount-badge">-12%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating">
-                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
-                                            <span>(175)</span>
-                                        </div>
-                                        <h3>Gaming Mouse RGB</h3>
-                                        <p>Precision optical sensor, 8000 DPI</p>
-                                        <strong>$79.99</strong>
-                                        <div class="product-card-actions">
-                                            <button type="button" class="product-view-btn js-home-add-btn" data-product="Gaming Mouse RGB">
-                                                <i class="fas fa-cart-plus"></i> Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-12 col-md-6 col-xl-4">
-                                <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open 4K Monitor 27 inch details">
-                                    <div style="position: relative;">
-                                        <img src="images/silly%20cat.jpg" alt="4K Monitor" loading="lazy">
-                                        <span class="product-discount-badge">-18%</span>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-rating">
-                                            <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
-                                            <span>(203)</span>
-                                        </div>
-                                        <h3>4K Monitor 27&quot;</h3>
-                                        <p>Professional-grade display with HDR</p>
-                                        <strong>$599.99</strong>
-                                        <div class="product-card-actions">
-                                            <button type="button" class="product-view-btn js-home-add-btn" data-product="4K Monitor 27 inch">
-                                                <i class="fas fa-cart-plus"></i> Add to Cart
-                                            </button>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
+                        <div class="row g-3" id="home-featured-grid"></div>
                     </div>
 
                     <div class="col-12 col-lg-3 d-flex flex-column gap-3">
@@ -247,92 +107,7 @@
 
             <section class="mt-5">
                 <h2 class="section-title">Trending Now</h2>
-                <div class="row g-3">
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open Mechanical Keyboard details">
-                            <div style="position: relative;">
-                                <img src="images/silly%20cat.jpg" alt="Mechanical Keyboard" loading="lazy">
-                            </div>
-                            <div class="product-info">
-                                <div class="product-rating">
-                                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
-                                    <span>(94)</span>
-                                </div>
-                                <h3>Mechanical Keyboard</h3>
-                                <p>RGB Mechanical Switches</p>
-                                <strong>$149.99</strong>
-                                <div class="product-card-actions">
-                                    <button type="button" class="product-view-btn js-home-add-btn" data-product="Mechanical Keyboard">
-                                        <i class="fas fa-cart-plus"></i> Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open HD Webcam 4K details">
-                            <div style="position: relative;">
-                                <img src="images/silly%20cat.jpg" alt="HD Webcam 4K" loading="lazy">
-                            </div>
-                            <div class="product-info">
-                                <div class="product-rating">
-                                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
-                                    <span>(67)</span>
-                                </div>
-                                <h3>HD Webcam 4K</h3>
-                                <p>Auto Focus & Stereo</p>
-                                <strong>$129.99</strong>
-                                <div class="product-card-actions">
-                                    <button type="button" class="product-view-btn js-home-add-btn" data-product="HD Webcam 4K">
-                                        <i class="fas fa-cart-plus"></i> Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open Tablet Pro 12.9 details">
-                            <div style="position: relative;">
-                                <img src="images/silly%20cat.jpg" alt="Tablet Pro 12.9" loading="lazy">
-                            </div>
-                            <div class="product-info">
-                                <div class="product-rating">
-                                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
-                                    <span>(211)</span>
-                                </div>
-                                <h3>Tablet Pro 12.9</h3>
-                                <p>Super Retina Display</p>
-                                <strong>$649.99</strong>
-                                <div class="product-card-actions">
-                                    <button type="button" class="product-view-btn js-home-add-btn" data-product="Tablet Pro 12.9">
-                                        <i class="fas fa-cart-plus"></i> Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <article class="product-card product-card-clickable js-product-card" data-product-url="product-detail.html" tabindex="0" role="button" aria-label="Open Smart Speaker details">
-                            <div style="position: relative;">
-                                <img src="images/silly%20cat.jpg" alt="Smart Speaker" loading="lazy">
-                            </div>
-                            <div class="product-info">
-                                <div class="product-rating">
-                                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
-                                    <span>(156)</span>
-                                </div>
-                                <h3>Smart Speaker</h3>
-                                <p>Voice Control Enabled</p>
-                                <strong>$89.99</strong>
-                                <div class="product-card-actions">
-                                    <button type="button" class="product-view-btn js-home-add-btn" data-product="Smart Speaker">
-                                        <i class="fas fa-cart-plus"></i> Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
+                <div class="row g-3" id="home-trending-grid"></div>
             </section>
         </main>
 
@@ -351,6 +126,8 @@
 </footer>
     </div>
 
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
