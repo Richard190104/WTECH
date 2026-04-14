@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Support\CartSessionMerger;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, CartSessionMerger $cartSessionMerger): RedirectResponse
     {
         $validated = $request->validate([
             'first_name' => ['required', 'string', 'max:100'],
@@ -38,6 +39,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
         $request->session()->regenerate();
+        $cartSessionMerger->mergeGuestSessionCartIntoUserCart($request, (int) $user->id);
 
         return redirect()->route('home');
     }

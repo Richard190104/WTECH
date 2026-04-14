@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#fef9c3"/>
+  <rect x="140" y="250" width="920" height="320" rx="26" fill="#111827"/>
+  <g fill="#1f2937">
+    <rect x="190" y="300" width="90" height="60" rx="10"/>
+    <rect x="300" y="300" width="90" height="60" rx="10"/>
+    <rect x="410" y="300" width="90" height="60" rx="10"/>
+    <rect x="520" y="300" width="90" height="60" rx="10"/>
+    <rect x="630" y="300" width="90" height="60" rx="10"/>
+    <rect x="740" y="300" width="90" height="60" rx="10"/>
+    <rect x="850" y="300" width="90" height="60" rx="10"/>
+    <rect x="190" y="390" width="750" height="60" rx="10"/>
+    <rect x="190" y="480" width="350" height="60" rx="10"/>
+    <rect x="560" y="480" width="380" height="60" rx="10"/>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Verdana, Geneva, Tahoma, sans-serif" font-size="44" fill="#854d0e">Mechanical Keyboard</text>
+</svg>

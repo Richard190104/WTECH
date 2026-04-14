@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Support\CartSessionMerger;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, CartSessionMerger $cartSessionMerger): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -29,6 +30,8 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate();
+
+        $cartSessionMerger->mergeGuestSessionCartIntoUserCart($request, (int) Auth::id());
 
         return redirect()->intended('/');
     }

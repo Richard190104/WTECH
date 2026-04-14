@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#dcfce7"/>
+  <rect x="345" y="80" width="210" height="260" rx="70" fill="#166534"/>
+  <rect x="240" y="260" width="420" height="680" rx="120" fill="#052e16"/>
+  <rect x="285" y="325" width="330" height="430" rx="60" fill="#22c55e"/>
+  <rect x="345" y="860" width="210" height="260" rx="70" fill="#166534"/>
+  <text x="450" y="1140" text-anchor="middle" font-family="Verdana, Geneva, Tahoma, sans-serif" font-size="44" fill="#14532d">Smartwatch</text>
+</svg>
