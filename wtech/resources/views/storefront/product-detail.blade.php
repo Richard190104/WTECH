@@ -4,12 +4,35 @@
 
 @section('content')
 @php
+    $resolveImageSrc = function (?string $imagePath, string $fallback): string {
+        if (empty($imagePath)) {
+            return $fallback;
+        }
+
+        if (
+            str_starts_with($imagePath, 'http://') ||
+            str_starts_with($imagePath, 'https://') ||
+            str_starts_with($imagePath, 'data:')
+        ) {
+            return $imagePath;
+        }
+
+        if (
+            str_starts_with($imagePath, '/') ||
+            str_starts_with($imagePath, 'images/') ||
+            str_starts_with($imagePath, 'storage/')
+        ) {
+            return asset(ltrim($imagePath, '/'));
+        }
+
+        return asset('storage/' . $imagePath);
+    };
+
     $mainImage = $images->firstWhere('is_title', true) ?? $images->first();
-    $mainImageSrc = !empty($mainImage?->image_path)
-        ? (str_starts_with($mainImage->image_path, 'http')
-            ? $mainImage->image_path
-            : asset('storage/' . $mainImage->image_path))
-        : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80';
+    $mainImageSrc = $resolveImageSrc(
+        $mainImage?->image_path,
+        'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80'
+    );
 
     $rating = (float) ($product->rating_avg ?? 0);
     $fullStars = floor($rating);
@@ -42,11 +65,10 @@
             <div class="pdp-thumbs" aria-label="Product images">
                 @foreach ($images as $image)
                     @php
-                        $thumbSrc = !empty($image->image_path)
-                            ? (str_starts_with($image->image_path, 'http')
-                                ? $image->image_path
-                                : asset('storage/' . $image->image_path))
-                            : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80';
+                        $thumbSrc = $resolveImageSrc(
+                            $image->image_path,
+                            'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80'
+                        );
                     @endphp
 
                     <button
@@ -240,11 +262,10 @@
                     $relatedHasHalfStar = ($relatedRating - $relatedFullStars) >= 0.5;
                     $relatedDiscount = (float) ($relatedProduct->discount ?? 0);
 
-                    $relatedImageSrc = !empty($relatedProduct->image_path)
-                        ? (str_starts_with($relatedProduct->image_path, 'http')
-                            ? $relatedProduct->image_path
-                            : asset('storage/' . $relatedProduct->image_path))
-                        : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80';
+                    $relatedImageSrc = $resolveImageSrc(
+                        $relatedProduct->image_path,
+                        'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80'
+                    );
                 @endphp
 
                 <div class="col-12 col-md-6 col-xl-3">

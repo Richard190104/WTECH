@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#e0f2fe"/>
+  <rect x="220" y="120" width="460" height="960" rx="56" fill="#0f172a"/>
+  <rect x="250" y="200" width="400" height="800" rx="32" fill="#0284c7"/>
+  <circle cx="450" cy="152" r="10" fill="#94a3b8"/>
+  <circle cx="450" cy="1040" r="18" fill="#475569"/>
+  <text x="450" y="1135" text-anchor="middle" font-family="Verdana, Geneva, Tahoma, sans-serif" font-size="46" fill="#0f172a">Flagship Phone</text>
+</svg>

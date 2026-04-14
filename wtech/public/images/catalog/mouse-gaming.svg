@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#f3e8ff"/>
+  <path d="M600 160C478 160 400 268 400 420C400 560 486 650 600 650C714 650 800 560 800 420C800 268 722 160 600 160Z" fill="#4c1d95"/>
+  <rect x="560" y="230" width="80" height="140" rx="30" fill="#8b5cf6"/>
+  <line x1="600" y1="230" x2="600" y2="650" stroke="#a78bfa" stroke-width="5"/>
+  <text x="600" y="740" text-anchor="middle" font-family="Verdana, Geneva, Tahoma, sans-serif" font-size="44" fill="#4c1d95">Gaming Mouse</text>
+</svg>

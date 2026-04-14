@@ -39,11 +39,24 @@
 
                     @foreach ($cartItems as $item)
                         @php
-                            $imageSrc = !empty($item['image_path'] ?? null)
-                                ? (str_starts_with($item['image_path'], 'http')
-                                    ? $item['image_path']
-                                    : asset('storage/' . $item['image_path']))
-                                : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80';
+                            $imagePath = $item['image_path'] ?? null;
+                            if (empty($imagePath)) {
+                                $imageSrc = 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80';
+                            } elseif (
+                                str_starts_with($imagePath, 'http://') ||
+                                str_starts_with($imagePath, 'https://') ||
+                                str_starts_with($imagePath, 'data:')
+                            ) {
+                                $imageSrc = $imagePath;
+                            } elseif (
+                                str_starts_with($imagePath, '/') ||
+                                str_starts_with($imagePath, 'images/') ||
+                                str_starts_with($imagePath, 'storage/')
+                            ) {
+                                $imageSrc = asset(ltrim($imagePath, '/'));
+                            } else {
+                                $imageSrc = asset('storage/' . $imagePath);
+                            }
 
                             $lineTotal = ((float) $item['price']) * ((int) $item['quantity']);
                         @endphp
@@ -64,22 +77,18 @@
                             </div>
 
                             <div>
-                            <form method="POST" action="{{ route('cart.setQuantity', $item['product_id']) }}" class="d-flex align-items-center gap-2">
-                                @csrf
+                                <form method="POST" action="{{ route('cart.setQuantity', $item['product_id']) }}" class="d-flex align-items-center gap-2">
+                                    @csrf
 
-                                <button type="submit" name="action" value="decrease" class="btn btn-sm btn-outline-secondary">-</button>
+                                    <button type="submit" name="action" value="decrease" class="btn btn-sm btn-outline-secondary">-</button>
 
-                                <span
-                                    
-                                >
-                                    {{ $item['quantity'] }}
-                                </span>
+                                    <span>
+                                        {{ $item['quantity'] }}
+                                    </span>
 
-                                <button type="submit" name="action" value="increase" class="btn btn-sm btn-outline-secondary">+</button>
-
-                               
-                            </form>
-                        </div>
+                                    <button type="submit" name="action" value="increase" class="btn btn-sm btn-outline-secondary">+</button>
+                                </form>
+                            </div>
 
                             <div class="cart-price">
                                 €{{ number_format($lineTotal, 2) }}
