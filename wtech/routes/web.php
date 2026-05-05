@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\AdminProductController;
 Route::get('/', [ProductController::class, 'home'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
@@ -16,6 +18,9 @@ Route::middleware('guest')->group(function () {
     })->name('login');
 
     Route::post('login', [LoginController::class, 'store']);
+
+    Route::get('admin/login', [AdminLoginController::class, 'create'])->name('admin.login');
+    Route::post('admin/login', [AdminLoginController::class, 'store'])->name('admin.login.store');
 
     Route::get('register', function () {
         return view('auth.register');
@@ -43,3 +48,13 @@ Route::get('/checkout/shipping', [CheckoutController::class, 'shipping'])->name(
 Route::post('/checkout/shipping', [CheckoutController::class, 'storeShipping'])->name('shipping.store');
 Route::get('/checkout/delivery', [CheckoutController::class, 'delivery'])->name('delivery');
 Route::post('/checkout/delivery', [CheckoutController::class, 'storeDelivery'])->name('delivery.store');
+
+// Admin routes
+Route::middleware('auth', 'admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [AdminProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+});

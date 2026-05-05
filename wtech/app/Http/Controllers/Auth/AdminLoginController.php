@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Support\CartSessionMerger;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
-class LoginController extends Controller
+class AdminLoginController extends Controller
 {
-    public function store(Request $request, CartSessionMerger $cartSessionMerger): RedirectResponse
+    public function create(): View
+    {
+        return view('auth.admin-login');
+    }
+
+    public function store(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -29,31 +34,19 @@ class LoginController extends Controller
             ])->onlyInput('email');
         }
 
-        if (Auth::user()?->role === 'admin') {
+        if (Auth::user()?->role !== 'admin') {
             Auth::logout();
 
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
             return back()->withErrors([
-                'email' => 'Admin account detected. Please use the admin login page.',
+                'email' => 'This page is for administrator accounts only.',
             ])->onlyInput('email');
         }
 
         $request->session()->regenerate();
 
-        $cartSessionMerger->mergeGuestSessionCartIntoUserCart($request, (int) Auth::id());
-
-        return redirect()->intended(route('home'));
-    }
-
-    public function destroy(Request $request): RedirectResponse
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/');
+        return redirect()->intended(route('admin.products.index'));
     }
 }
