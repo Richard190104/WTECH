@@ -211,7 +211,7 @@
                         >
                             <div style="position: relative;">
                                 <img
-                                    src="{{ $product->image_path ?? 'https://www.vecteezy.com/free-photos/cute-baby-cat' }}"
+                                    src="{{ $product->image_path ? asset(ltrim($product->image_path, '/')) : 'https://www.vecteezy.com/free-photos/cute-baby-cat' }}"
                                     alt="{{ $product->title }}"
                                 >
 
