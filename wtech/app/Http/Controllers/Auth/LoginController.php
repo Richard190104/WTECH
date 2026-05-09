@@ -42,7 +42,28 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        $cartSessionMerger->mergeGuestSessionCartIntoUserCart($request, (int) Auth::id());
+        $isCheckoutInProgress = $request->session()->has('checkout.resume');
+
+        $cartSessionMerger->mergeGuestSessionCartIntoUserCart(
+            $request,
+            (int) Auth::id(),
+            $isCheckoutInProgress
+        );
+
+        $checkoutResume = $request->session()->get('checkout.resume');
+
+        if (is_array($checkoutResume)) {
+            $request->session()->put('checkout.shipping_method', $checkoutResume['shipping_method'] ?? session('checkout.shipping_method'));
+            $request->session()->put('checkout.shipping_price', (float) ($checkoutResume['shipping_price'] ?? session('checkout.shipping_price', 15)));
+            $request->session()->put('checkout.payment_method', $checkoutResume['payment_method'] ?? session('checkout.payment_method'));
+
+            $deliveryDraft = $checkoutResume['delivery_draft'] ?? [];
+            if (is_array($deliveryDraft)) {
+                $request->session()->put('checkout.delivery_draft', $deliveryDraft);
+            }
+
+            $request->session()->forget('checkout.resume');
+        }
 
         return redirect()->intended(route('home'));
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -100,10 +101,64 @@ class CheckoutController extends Controller
 
     return view('storefront.delivery', [
         'user' => auth()->user(),
+        'deliveryDraft' => session('checkout.delivery_draft', []),
         'shippingMethod' => session('checkout.shipping_method'),
         'paymentMethod' => session('checkout.payment_method'),
         'total' => $total,
     ]);
+}
+
+public function redirectToLoginFromDelivery(Request $request): RedirectResponse
+{
+    if (auth()->check()) {
+        return redirect()->route('delivery');
+    }
+
+    $shippingMethod = session('checkout.shipping_method');
+    $paymentMethod = session('checkout.payment_method');
+
+    if (! $shippingMethod || ! $paymentMethod) {
+        return redirect()
+            ->route('shipping')
+            ->withErrors(['checkout' => 'Please complete shipping and payment first.']);
+    }
+
+    $draft = [];
+    foreach ([
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+        'street_address',
+        'city',
+        'zip_code',
+        'country',
+        'notes',
+    ] as $field) {
+        $value = $request->input($field);
+
+        if (! is_string($value)) {
+            continue;
+        }
+
+        $trimmed = trim($value);
+        if ($trimmed === '') {
+            continue;
+        }
+
+        $draft[$field] = $trimmed;
+    }
+
+    $request->session()->put('checkout.delivery_draft', $draft);
+    $request->session()->put('checkout.resume', [
+        'shipping_method' => session('checkout.shipping_method'),
+        'shipping_price' => (float) session('checkout.shipping_price', 15),
+        'payment_method' => session('checkout.payment_method'),
+        'delivery_draft' => $draft,
+    ]);
+    $request->session()->put('url.intended', route('delivery'));
+
+    return redirect()->route('login');
 }
 
 public function storeDelivery(Request $request)
@@ -290,6 +345,8 @@ public function storeDelivery(Request $request)
         'checkout.shipping_method',
         'checkout.shipping_price',
         'checkout.payment_method',
+        'checkout.delivery_draft',
+        'checkout.resume',
     ]);
 
     return redirect('/')

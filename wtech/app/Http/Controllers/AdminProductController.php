@@ -141,6 +141,27 @@ class AdminProductController extends Controller
             'images_to_delete.*' => ['integer', 'exists:product_images,id'],
         ]);
 
+        $currentImageIds = DB::table('product_images')
+            ->where('product_id', $id)
+            ->pluck('id')
+            ->map(fn ($imageId) => (int) $imageId)
+            ->all();
+
+        $imagesToDelete = array_values(array_intersect(
+            $currentImageIds,
+            array_map('intval', $validated['images_to_delete'] ?? [])
+        ));
+
+        $remainingImageCount = count($currentImageIds) - count($imagesToDelete);
+        $newImages = $request->file('new_images', []);
+        $finalImageCount = $remainingImageCount + count($newImages);
+
+        if ($finalImageCount < 2) {
+            return back()
+                ->withErrors(['new_images' => 'A product must contain at least 2 images.'])
+                ->withInput();
+        }
+
         DB::transaction(function () use ($validated, $request, $id) {
             DB::table('products')->where('id', $id)->update([
                 'title' => $validated['title'],

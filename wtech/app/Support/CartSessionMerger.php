@@ -7,11 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class CartSessionMerger
 {
-    public function mergeGuestSessionCartIntoUserCart(Request $request, int $userId): void
+    public function mergeGuestSessionCartIntoUserCart(Request $request, int $userId, bool $replaceUserCart): void
     {
         $sessionCart = $request->session()->get('cart', []);
 
         if (! is_array($sessionCart) || empty($sessionCart)) {
+            return;
+        }
+
+        if (! $replaceUserCart) {
+            // Keep the existing DB cart outside checkout-resume login flow.
+            $request->session()->forget('cart');
             return;
         }
 
@@ -27,6 +33,11 @@ class CartSessionMerger
             } else {
                 $cartId = $cart->id;
             }
+
+            // When a guest logs in with an active guest cart, that guest cart becomes the source of truth.
+            DB::table('cart_items')
+                ->where('cart_id', $cartId)
+                ->delete();
 
             foreach ($sessionCart as $productId => $requestedQuantity) {
                 $productId = (int) $productId;
@@ -51,30 +62,14 @@ class CartSessionMerger
                     continue;
                 }
 
-                $existingItem = DB::table('cart_items')
-                    ->where('cart_id', $cartId)
-                    ->where('product_id', $productId)
-                    ->first();
+                $insertQuantity = min($maxAvailable, $requestedQuantity);
 
-                if ($existingItem) {
-                    $newQuantity = min($maxAvailable, ((int) $existingItem->quantity) + $requestedQuantity);
-
-                    DB::table('cart_items')
-                        ->where('id', $existingItem->id)
-                        ->update([
-                            'quantity' => $newQuantity,
-                            'unit_price' => $product->price,
-                        ]);
-                } else {
-                    $insertQuantity = min($maxAvailable, $requestedQuantity);
-
-                    DB::table('cart_items')->insert([
-                        'cart_id' => $cartId,
-                        'product_id' => $productId,
-                        'quantity' => $insertQuantity,
-                        'unit_price' => $product->price,
-                    ]);
-                }
+                DB::table('cart_items')->insert([
+                    'cart_id' => $cartId,
+                    'product_id' => $productId,
+                    'quantity' => $insertQuantity,
+                    'unit_price' => $product->price,
+                ]);
             }
         });
 

@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
         $request->session()->regenerate();
-        $cartSessionMerger->mergeGuestSessionCartIntoUserCart($request, (int) $user->id);
+        $cartSessionMerger->mergeGuestSessionCartIntoUserCart($request, (int) $user->id, false);
 
         return redirect()->route('home');
     }

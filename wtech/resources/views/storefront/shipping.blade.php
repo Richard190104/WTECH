@@ -3,6 +3,21 @@
 @section('title', 'Shipping & Payment')
 
 @section('content')
+@php
+    $selectedShipping = old('shipping_method', session('checkout.shipping_method', 'Courier Delivery'));
+    $selectedPayment = old('payment_method', session('checkout.payment_method', 'Credit Card'));
+
+    $shippingPrices = [
+        'Courier Delivery' => 15.0,
+        'Pickup Point' => 0.0,
+        'Personal Pickup' => 8.0,
+    ];
+
+    $selectedShippingPrice = (float) old(
+        'shipping_price',
+        $shippingPrices[$selectedShipping] ?? session('checkout.shipping_price', 15)
+    );
+@endphp
 <main class="container-xl mt-4 pb-5">
     <h1 style="font-size: 2rem; margin-bottom: var(--spacing-lg); color: var(--text-primary);">
         <i class="fas fa-truck"></i> Shipping & Payment
@@ -35,45 +50,45 @@
                 <div class="checkout-box mb-3">
                     <h2 class="checkout-box-title"><i class="fas fa-box"></i> Shipping Method</h2>
 
-                    <label class="option-card is-selected">
-                        <input type="radio" name="shipping_method" value="Courier Delivery" data-price="15" checked>
+                    <label class="option-card {{ $selectedShipping === 'Courier Delivery' ? 'is-selected' : '' }}">
+                        <input type="radio" name="shipping_method" value="Courier Delivery" data-price="15" {{ $selectedShipping === 'Courier Delivery' ? 'checked' : '' }}>
                         <span class="option-title"><i class="fas fa-truck"></i> Courier Delivery</span>
                         <span class="option-note">Delivery in 1-2 business days • €15.00</span>
                     </label>
 
-                    <label class="option-card">
-                        <input type="radio" name="shipping_method" value="Pickup Point" data-price="0">
+                    <label class="option-card {{ $selectedShipping === 'Pickup Point' ? 'is-selected' : '' }}">
+                        <input type="radio" name="shipping_method" value="Pickup Point" data-price="0" {{ $selectedShipping === 'Pickup Point' ? 'checked' : '' }}>
                         <span class="option-title"><i class="fas fa-location-dot"></i> Pickup Point</span>
                         <span class="option-note">Pickup points • FREE</span>
                     </label>
 
-                    <label class="option-card">
-                        <input type="radio" name="shipping_method" value="Personal Pickup" data-price="8">
+                    <label class="option-card {{ $selectedShipping === 'Personal Pickup' ? 'is-selected' : '' }}">
+                        <input type="radio" name="shipping_method" value="Personal Pickup" data-price="8" {{ $selectedShipping === 'Personal Pickup' ? 'checked' : '' }}>
                         <span class="option-title"><i class="fas fa-store"></i> Personal Pickup</span>
                         <span class="option-note">Showroom pickup • €8.00</span>
                     </label>
 
-                    <input type="hidden" name="shipping_price" id="shipping-price" value="15">
+                    <input type="hidden" name="shipping_price" id="shipping-price" value="{{ number_format($selectedShippingPrice, 2, '.', '') }}">
                 </div>
 
                 <!-- PAYMENT -->
                 <div class="checkout-box">
                     <h2 class="checkout-box-title"><i class="fas fa-credit-card"></i> Payment Method</h2>
 
-                    <label class="option-card is-selected">
-                        <input type="radio" name="payment_method" value="Credit Card" checked>
+                    <label class="option-card {{ $selectedPayment === 'Credit Card' ? 'is-selected' : '' }}">
+                        <input type="radio" name="payment_method" value="Credit Card" {{ $selectedPayment === 'Credit Card' ? 'checked' : '' }}>
                         <span class="option-title"><i class="fas fa-credit-card"></i> Credit Card</span>
                         <span class="option-note">Visa, Mastercard</span>
                     </label>
 
-                    <label class="option-card">
-                        <input type="radio" name="payment_method" value="Bank Transfer">
+                    <label class="option-card {{ $selectedPayment === 'Bank Transfer' ? 'is-selected' : '' }}">
+                        <input type="radio" name="payment_method" value="Bank Transfer" {{ $selectedPayment === 'Bank Transfer' ? 'checked' : '' }}>
                         <span class="option-title"><i class="fas fa-university"></i> Bank Transfer</span>
                         <span class="option-note">3-5 days</span>
                     </label>
 
-                    <label class="option-card">
-                        <input type="radio" name="payment_method" value="PayPal">
+                    <label class="option-card {{ $selectedPayment === 'PayPal' ? 'is-selected' : '' }}">
+                        <input type="radio" name="payment_method" value="PayPal" {{ $selectedPayment === 'PayPal' ? 'checked' : '' }}>
                         <span class="option-title"><i class="fab fa-paypal"></i> PayPal</span>
                         <span class="option-note">Fast & secure</span>
                     </label>
@@ -132,6 +147,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const subtotal = parseFloat("{{ $subtotal }}");
     const vatRate = 0.2;
+
+    const checkedShipping = document.querySelector('input[name="shipping_method"]:checked');
+    if (checkedShipping) {
+        const price = parseFloat(checkedShipping.dataset.price || '0');
+        const vat = subtotal * vatRate;
+        const total = subtotal + vat + price;
+
+        shippingPriceInput.value = price;
+        document.getElementById('summary-shipping').textContent = `€${price.toFixed(2)}`;
+        document.getElementById('summary-vat').textContent = `€${vat.toFixed(2)}`;
+        document.getElementById('summary-total').textContent = `€${total.toFixed(2)}`;
+    }
 
     shippingInputs.forEach(input => {
         input.addEventListener('change', () => {

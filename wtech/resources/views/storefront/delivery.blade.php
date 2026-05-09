@@ -36,6 +36,26 @@
             </div>
         @endif
 
+        @guest
+            <form method="POST" action="{{ route('delivery.login') }}" style="margin-bottom: 16px;">
+                @csrf
+
+                <input type="hidden" name="first_name" id="snapshot-first-name">
+                <input type="hidden" name="last_name" id="snapshot-last-name">
+                <input type="hidden" name="email" id="snapshot-email">
+                <input type="hidden" name="phone" id="snapshot-phone">
+                <input type="hidden" name="street_address" id="snapshot-street-address">
+                <input type="hidden" name="city" id="snapshot-city">
+                <input type="hidden" name="zip_code" id="snapshot-zip-code">
+                <input type="hidden" name="country" id="snapshot-country">
+                <input type="hidden" name="notes" id="snapshot-notes">
+
+                <button type="submit" class="continue-btn continue-btn-light" id="login-from-delivery">
+                    <i class="fas fa-sign-in-alt"></i> Log in and continue checkout
+                </button>
+            </form>
+        @endguest
+
         <form class="delivery-form" id="delivery-form" method="POST" action="{{ route('delivery.store') }}" novalidate>
             @csrf
 
@@ -50,7 +70,7 @@
                         type="text"
                         required
                         placeholder="John"
-                        value="{{ old('first_name', $user?->first_name ?? '') }}"
+                        value="{{ old('first_name', $deliveryDraft['first_name'] ?? ($user?->first_name ?? '')) }}"
                     >
                 </div>
 
@@ -62,7 +82,7 @@
                         type="text"
                         required
                         placeholder="Doe"
-                        value="{{ old('last_name', $user?->last_name ?? '') }}"
+                        value="{{ old('last_name', $deliveryDraft['last_name'] ?? ($user?->last_name ?? '')) }}"
                     >
                 </div>
             </div>
@@ -74,7 +94,7 @@
                 type="email"
                 required
                 placeholder="john@example.com"
-                value="{{ old('email', $user?->email ?? '') }}"
+                value="{{ old('email', $deliveryDraft['email'] ?? ($user?->email ?? '')) }}"
             >
 
             <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
@@ -84,7 +104,7 @@
                 type="tel"
                 required
                 placeholder="+421 900 000 000"
-                value="{{ old('phone') }}"
+                value="{{ old('phone', $deliveryDraft['phone'] ?? '') }}"
             >
 
             <label for="street-address"><i class="fas fa-road"></i> Street Address</label>
@@ -94,7 +114,7 @@
                 type="text"
                 required
                 placeholder="123 Main Street"
-                value="{{ old('street_address') }}"
+                value="{{ old('street_address', $deliveryDraft['street_address'] ?? '') }}"
             >
 
             <div class="delivery-grid-2">
@@ -106,7 +126,7 @@
                         type="text"
                         required
                         placeholder="Bratislava"
-                        value="{{ old('city') }}"
+                        value="{{ old('city', $deliveryDraft['city'] ?? '') }}"
                     >
                 </div>
 
@@ -118,7 +138,7 @@
                         type="text"
                         required
                         placeholder="81101"
-                        value="{{ old('zip_code') }}"
+                        value="{{ old('zip_code', $deliveryDraft['zip_code'] ?? '') }}"
                     >
                 </div>
             </div>
@@ -130,7 +150,7 @@
                 type="text"
                 required
                 placeholder="Slovakia"
-                value="{{ old('country', 'Slovakia') }}"
+                value="{{ old('country', $deliveryDraft['country'] ?? 'Slovakia') }}"
             >
 
             <label for="notes"><i class="fas fa-sticky-note"></i> Additional Notes (optional)</label>
@@ -139,17 +159,17 @@
                 name="notes"
                 rows="3"
                 placeholder="Any special delivery instructions or preferences..."
-            >{{ old('notes') }}</textarea>
+            >{{ old('notes', $deliveryDraft['notes'] ?? '') }}</textarea>
 
             <div class="delivery-recap" id="delivery-recap">
                 <p>
                     <strong><i class="fas fa-box"></i> Shipping Method:</strong>
-                    <span id="recap-shipping">{{ $shippingMethod ?? session('shipping_method', 'Courier Delivery') }}</span>
+                    <span id="recap-shipping">{{ $shippingMethod ?? session('checkout.shipping_method', 'Courier Delivery') }}</span>
                 </p>
 
                 <p>
                     <strong><i class="fas fa-credit-card"></i> Payment Method:</strong>
-                    <span id="recap-payment">{{ $paymentMethod ?? session('payment_method', 'Credit Card') }}</span>
+                    <span id="recap-payment">{{ $paymentMethod ?? session('checkout.payment_method', 'Credit Card') }}</span>
                 </p>
 
                 <p style="border-top: 1px solid var(--border); padding-top: var(--spacing-md); margin-top: var(--spacing-md); font-size: 1.1rem;">
@@ -178,4 +198,31 @@
         </form>
     </section>
 </main>
+
+@guest
+<script>
+document.getElementById('login-from-delivery')?.addEventListener('click', function () {
+    const map = [
+        ['first-name', 'snapshot-first-name'],
+        ['last-name', 'snapshot-last-name'],
+        ['email', 'snapshot-email'],
+        ['phone', 'snapshot-phone'],
+        ['street-address', 'snapshot-street-address'],
+        ['city', 'snapshot-city'],
+        ['zip-code', 'snapshot-zip-code'],
+        ['country', 'snapshot-country'],
+        ['notes', 'snapshot-notes'],
+    ];
+
+    for (const [sourceId, targetId] of map) {
+        const source = document.getElementById(sourceId);
+        const target = document.getElementById(targetId);
+
+        if (source && target) {
+            target.value = source.value;
+        }
+    }
+});
+</script>
+@endguest
 @endsection

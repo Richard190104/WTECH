@@ -48,6 +48,8 @@ Route::get('/checkout/shipping', [CheckoutController::class, 'shipping'])->name(
 Route::post('/checkout/shipping', [CheckoutController::class, 'storeShipping'])->name('shipping.store');
 Route::get('/checkout/delivery', [CheckoutController::class, 'delivery'])->name('delivery');
 Route::post('/checkout/delivery', [CheckoutController::class, 'storeDelivery'])->name('delivery.store');
+Route::post('/checkout/delivery/login', [CheckoutController::class, 'redirectToLoginFromDelivery'])
+    ->name('delivery.login');
 
 // Admin routes
 Route::middleware('auth', 'admin')->prefix('admin')->name('admin.')->group(function () {
